@@ -56,7 +56,7 @@
           position: {lat:  bicharedo[indicesorteado].latitude, lng: bicharedo[indicesorteado].longitude},
           map: map,
           icon:bicharedo[indicesorteado].icone,
-          title: 'Hello World!'
+          title: bicharedo[indicesorteado].nome
         });
         
         marker.addListener('click', function() {

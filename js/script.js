@@ -1,8 +1,11 @@
 function openNav() {
     if ((document.getElementById("menuLateral").style.width == 0) || (document.getElementById("menuLateral").style.width == "0px")){
         document.getElementById("menuLateral").style.width = "250px";
+        document.getElementById("map").classList.add("mapaContraido");
+
     } else{
         document.getElementById("menuLateral").style.width = "0";  
+        document.getElementById("map").classList.remove("mapaContraido");
     }
 }
 
