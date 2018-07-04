@@ -1,3 +1,10 @@
+//  Grupo:
+//     Dierlys R
+//     Geordano L
+//     Madson N
+//     Rafael T
+//     Tiago W 
+    
 function openNav() {
     if ((document.getElementById("menuLateral").style.width == 0) || (document.getElementById("menuLateral").style.width == "0px")){
         document.getElementById("menuLateral").style.width = "250px";

@@ -1,4 +1,12 @@
-    class Bichos{
+// Grupo:
+//     Dierlys R
+//     Geordano L
+//     Madson N
+//     Rafael T
+//     Tiago W 
+
+
+class Bichos{
         constructor(name, icon, content, hp, atk, def, lat, long){
             this.nome=name;
             this.icone=icon;
