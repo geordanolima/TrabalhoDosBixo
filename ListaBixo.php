@@ -59,8 +59,8 @@
                 </div>
                 <div class="card-body">
                     <form>
-                        <div class="form-group">
-                            <div class="form-row">
+                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 1)){ ?> style="visibility: hidden"<?php } ?>>
+                            <div class="form-row" >
                                 <div class="col-md-9">
                                     <label for="inputBixo1">Nome</label>
                                     <input type="text" class="form-control" id="inputBixo1" placeholder="Nome bixo" disabled>
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div> 
-                        <div class="form-group">
+                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 2)){ ?> style="visibility: hidden"<?php } ?>>
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputBixo2">Nome</label>
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                         </div>    
-                        <div class="form-group">
+                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 3)){ ?> style="visibility: hidden"<?php } ?>>
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputBixo3">Nome</label>
