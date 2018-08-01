@@ -71,7 +71,7 @@
                                             <button type="button" class="btn btn-block btn-warning">Editar</button>
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="php/Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="php/Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                             <button type="button" class="btn btn-block btn-warning">Editar</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-danger">Excluir</button>
+                                            <a href="php/Funcoes.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                             <button type="button" class="btn btn-block btn-warning">Editar</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-block btn-danger">Excluir</button>
+                                            <a href="php/Funcoes.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
