@@ -57,22 +57,44 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-6">
+                                <label for="inputDefesa">Descrição</label>
+                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" >
+                            </div>   
+                            <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
                                 <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="inputAtaque">Ataque</label>
-                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0"> 
-                            </div>                            
+                            </div>                         
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="inputAtaque">Ataque</label>
+                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0"> 
+                            </div>   
+                            <div class="col-md-6">
+                                <label for="inputDefesa">Defesa</label>
+                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0">
+                            </div>                                                     
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="inputAtaque">Latitude</label>
+                                <input type="number" class="form-control" name="Latitude" min="0"> 
+                            </div>   
+                            <div class="col-md-6">
+                                <label for="inputDefesa">Longitude</label>
+                                <input type="number" class="form-control" name="Longitude" min="0">
+                            </div>
+                                                        
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
                             <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="inputDefesa">Defesa</label>
-                                    <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0">
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <label for="customFileLang">Imagem Item</label>
                                     <div class="input-group form-row">
                                         <input type="text" class="form-control" readonly="">
@@ -83,9 +105,14 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <img src="img/dog.png" height="90px" width="90px">
+                                </div>
                             </div>
                         </div>
-                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+                    
                 </form>
             </div>
         </div>
