@@ -7,10 +7,10 @@
       <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 
-    <link rel="icon" href="img/dog-w.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="img/dog-w.png" type="image/x-icon" />
+    <link rel="icon" href="../img/dog-w.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/dog-w.png" type="image/x-icon" />
     
     <title>Cadastro dos Bixo</title>
 
@@ -19,7 +19,7 @@
         <div class="pos-f-t">
             <nav class="navbar navbar-dark bg-dark fixed-top 5-col">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
-                    <span> <img src="img/dog-w.png" style="width: 30px; height: 35px;"></span>
+                    <span> <img src="../img/dog-w.png" style="width: 30px; height: 35px;"></span>
                     <label>
                         Joguinho dos bixo
                     </label>
@@ -30,12 +30,12 @@
 
     <div id="menuLateral" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="cadastroBixo.php">Cadastro bixo</a>
-        <a href="ListaBixo.php">Lista de bixo</a>
+        <a href="php/cadastroBixo.php">Cadastro bixo</a>
+        <a href="php/ListaBixo.php">Lista de bixo</a>
         <a href="cadastroJogador.html">Cadastro jogador</a>
         <a href="cadastroitem.html">Cadastro item</a>
         <a href="mapa.html">Mapa</a>
-        <img class="logoimg" src="img/dog-w.png">
+        <img class="logoimg" src="../img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
     </div>    
 
@@ -59,11 +59,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
-                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['DescricaoBixo'];?>">
+                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['descricaoBixo'];?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
-                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0">
+                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['vida'];?>">
                             </div>                         
                         </div>
                     </div>
@@ -71,11 +71,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Ataque</label>
-                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0"> 
+                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['ataque'];?>"> 
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Defesa</label>
-                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0">
+                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['defesa'];?>">
                             </div>                                                     
                         </div>
                     </div>
@@ -83,11 +83,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Latitude</label>
-                                <input type="number" class="form-control" name="Latitude" min="0"> 
+                                <input type="number" class="form-control" name="Latitude" min="0" value="<?=$dadosCliente[$idCliente]['latitude'];?>"> 
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Longitude</label>
-                                <input type="number" class="form-control" name="Longitude" min="0">
+                                <input type="number" class="form-control" name="Longitude" min="0" value="<?=$dadosCliente[$idCliente]['longitude'];?>">
                             </div>
                                                         
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="col-md-10">
                                     <label for="customFileLang">Imagem Bixo</label>
                                     <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="">
+                                        <input type="text" class="form-control" readonly="" value="<?=$dadosCliente[$idCliente]['descImg'];?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
                                                 Buscar <input type="file" style="display: none;" multiple=""> 
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <img src="img/dog.png" height="90px" width="90px">
+                                    <img src="<?=$dadosCliente[$idCliente]['img'];?>" height="90px" width="90px" style="border-radius: 50%;">
                                 </div>
                             </div>
                         </div>
@@ -130,6 +130,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

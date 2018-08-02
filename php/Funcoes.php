@@ -65,24 +65,45 @@ function editarCliente()
 
     $dadosCliente = 
         [1=>[
-            'id'        => 1,
-            'nome'      => 'aaaaaaaaa',
-            'DescricaoBixo'  => 'aaaaaaaa'
+            'id'            => 1,
+            'nome'          => 'Cusco',
+            'descricaoBixo' => 'tambem conhecido como cachorro',
+            'vida'          => 10,
+            'ataque'        => 17,
+            'defesa'        => 32,
+            'latitude'      => 1254,
+            'longitude'     => 6544,
+            'descImg'       => 'bixo' . $idCliente . '.png',
+            'img'           => '../public/imgs/bixo' . $idCliente . '.png'
         ],
         2=>[
-            'id'        => 2,
-            'nome'      => 'bbbbbbbb',
-            'DescricaoBixo'  => 'BBBBB'  
+            'id'            => 2,
+            'nome'          => 'Guaipeca',
+            'descricaoBixo' => 'Melhor amigo do Gaucho',
+            'vida'          => 35,
+            'ataque'        => 11,
+            'defesa'        => 51,
+            'latitude'      => 6655,
+            'longitude'     => 6547,
+            'descImg'       => 'bixo' . $idCliente . '.png',
+            'img'           => '../public/imgs/bixo' . $idCliente . '.png'
         ],
         3=>[
             'id'        => 3,
-            'nome'      => 'ccccccc',
-            'DescricaoBixo'  => 'ccccccccc'  
+            'nome'      => 'Tomba',
+            'descricaoBixo'  => 'Tomba lata, ou Vira-Latas',
+            'vida'          => 85,
+            'ataque'        => 33,
+            'defesa'        => 12,
+            'latitude'      => 5544,
+            'longitude'     => 9877,
+            'descImg'       => 'bixo' . $idCliente . '.png',
+            'img'           => '../public/imgs/bixo' . $idCliente . '.png'
         ]
 
         ]
     ;
-    require_once('../cadastrobixo.php');
+    require_once('cadastrobixo.php');
     exit;
 
 }
