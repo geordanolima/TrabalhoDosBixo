@@ -7,11 +7,11 @@
       <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
     
 
-    <link rel="icon" href="img/dog-w.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="img/dog-w.png" type="image/x-icon" />
+    <link rel="icon" href="../img/dog-w.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/dog-w.png" type="image/x-icon" />
 
     <title>Lista de bixo</title>
 
@@ -21,7 +21,7 @@
         <div class="pos-f-t">
             <nav class="navbar navbar-dark bg-dark fixed-top 5-col">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
-                    <span> <img src="img/dog-w.png" style="width: 30px; height: 35px;"></span>
+                    <span> <img src="../img/dog-w.png" style="width: 30px; height: 35px;"></span>
                     <label>
                         Joguinho dos bixo
                     </label>
@@ -37,7 +37,7 @@
         <a href="cadastroJogador.html">Cadastro jogador</a>
         <a href="cadastroitem.html">Cadastro item</a>
         <a href="mapa.html">Mapa</a>
-        <img class="logoimg" src="img/dog-w.png">
+        <img class="logoimg" src="../img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
     </div>    
 
@@ -64,15 +64,15 @@
                             <div class="form-row" >
                                 <div class="col-md-9">
                                     <label for="inputBixo1">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo1" placeholder="Nome bixo" disabled>
+                                    <input type="text" class="form-control" id="inputBixo1"  value="Cusco" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                            <a href="php/Funcoes.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                                            <a href="Funcoes.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="php/Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -82,15 +82,15 @@
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputBixo2">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo2" placeholder="Nome bixo" disabled>
+                                    <input type="text" class="form-control" id="inputBixo2" value="Guaipeca" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="php/Funcoes.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="Funcoes.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="php/Funcoes.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="Funcoes.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -100,15 +100,15 @@
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputBixo3">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo3" placeholder="Nome bixo" disabled>
+                                    <input type="text" class="form-control" id="inputBixo3" value="Tomba" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="php/Funcoes.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="Funcoes.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="php/Funcoes.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="Funcoes.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -130,6 +130,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
