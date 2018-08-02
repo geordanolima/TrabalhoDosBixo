@@ -46,11 +46,12 @@
             <div class="card-header">Cadastrar um bicho:</div>
             <div class="card-body">
                 <form>
+                    <input type="hidden" name="id" value="<?=$dadosCliente['id'];?>">
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-12">
                                 <label for="inputNome">Nome</label>
-                                <input type="text" class="form-control" id="inputNome" placeholder="Nome Bicho">
+                                <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome Bicho" value="<?=$dadosCliente[$idCliente]['nome'];?>">
                             </div>                            
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
-                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" >
+                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['DescricaoBixo'];?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>

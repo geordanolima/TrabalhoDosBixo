@@ -1,27 +1,12 @@
 <?php
-function carregarFotoCliente($arquivoEmProcesso, $nomeCliente)
-{
-    $mimesValidos = [
-        'image/png',
-        'image/jpg',
-        'image/jpeg'
-    ];
-    $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
-    if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], './public/imgs/'.$nomeCliente.'.jpg');   
-    }
-    return $validacao;
-}
 
 require_once('Funcoes.php');
-//if(!isset($_GET['op']) && !isset($_POST['op'])){
 if(!isset($_REQUEST['op'])){
     listarClientes();
     exit;
 }
 $opcao = strip_tags($_REQUEST['op']);
 
-//controller nao profissional
 switch($opcao){
 
     case 'excluir':
@@ -39,9 +24,21 @@ switch($opcao){
     default:
         listarClientes();
         break;
-
 }
 
+function carregarFotoCliente($arquivoEmProcesso, $nomeCliente)
+{
+    $mimesValidos = [
+        'image/png',
+        'image/jpg',
+        'image/jpeg'
+    ];
+    $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
+    if($validacao){
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], './public/imgs/'.$nomeCliente.'.jpg');   
+    }
+    return $validacao;
+}
 
 function excluirCliente()
 {
@@ -54,14 +51,44 @@ function excluirCliente()
     
     header('Location: ../listaBixo.php?excluido=' . $idCliente);
     exit;
+}
+
+function editarCliente()
+{
+    if(!isset($_GET['id'])){
+        header('Location: listaBixo.php?erro=1');
+        exit;
+    }
+    $idCliente = strip_tags($_GET['id']);
 
 
+
+    $dadosCliente = 
+        [1=>[
+            'id'        => 1,
+            'nome'      => 'aaaaaaaaa',
+            'DescricaoBixo'  => 'aaaaaaaa'
+        ],
+        2=>[
+            'id'        => 2,
+            'nome'      => 'bbbbbbbb',
+            'DescricaoBixo'  => 'BBBBB'  
+        ],
+        3=>[
+            'id'        => 3,
+            'nome'      => 'ccccccc',
+            'DescricaoBixo'  => 'ccccccccc'  
+        ]
+
+        ]
+    ;
+    require_once('../cadastrobixo.php');
+    exit;
 
 }
 
+
 function listarClientes(){
-    //SELECT * FROM cliente
-    //retornar para a view (frontend) array com os dados
     header('Location: listaBixo.php');
     exit;
 }
