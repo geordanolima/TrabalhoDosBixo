@@ -46,13 +46,13 @@
             <div class="card-header">Cadastrar um bicho:</div>
             <div class="card-body">
                 <form method="post" action="Funcoes.php" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?=$idCliente;?>">
+                <input type="hidden" name="id" value="<?=$idbixo;?>">
                 <input type="hidden" name="op" value="atualizar">
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-12">
                                 <label for="inputNome">Nome</label>
-                                <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome Bicho" value="<?=$dadosCliente[$idCliente]['nome'];?>">
+                                <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome Bicho" value="<?=$bixos[$idbixo]['nome'];?>">
                             </div>                            
                         </div>
                     </div>
@@ -60,11 +60,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
-                                <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['descricaoBixo'];?>">
+                                <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" value="<?=$bixos[$idbixo]['descricaoBixo'];?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
-                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['vida'];?>">
+                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['vida'];?>">
                             </div>                         
                         </div>
                     </div>
@@ -72,11 +72,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Ataque</label>
-                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['ataque'];?>"> 
+                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['ataque'];?>"> 
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Defesa</label>
-                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0" value="<?=$dadosCliente[$idCliente]['defesa'];?>">
+                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['defesa'];?>">
                             </div>                                                     
                         </div>
                     </div>
@@ -84,11 +84,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Latitude</label>
-                                <input type="number" class="form-control" name="Latitude" min="0" value="<?=$dadosCliente[$idCliente]['latitude'];?>"> 
+                                <input type="number" class="form-control" name="Latitude" min="0" value="<?=$bixos[$idbixo]['latitude'];?>"> 
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Longitude</label>
-                                <input type="number" class="form-control" name="Longitude" min="0" value="<?=$dadosCliente[$idCliente]['longitude'];?>">
+                                <input type="number" class="form-control" name="Longitude" min="0" value="<?=$bixos[$idbixo]['longitude'];?>">
                             </div>
                                                         
                         </div>
@@ -99,7 +99,7 @@
                                 <div class="col-md-10">
                                     <label for="customFileLang">Imagem Bixo</label>
                                     <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="" value="<?=$dadosCliente[$idCliente]['descImg'];?>">
+                                        <input type="text" class="form-control" readonly="" value="<?=$bixos[$idbixo]['descImg'];?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
                                                 Buscar <input type="file" style="display: none;" multiple="" name="foto" accept="image/*"> 
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <img src="<?=$dadosCliente[$idCliente]['img'];?>" height="90px" width="90px" style="border-radius: 50%;">
+                                    <img src="<?=$bixos[$idbixo]['img'];?>" height="90px" width="90px" style="border-radius: 50%;">
                                 </div>
                             </div>
                         </div>

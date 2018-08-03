@@ -2,31 +2,31 @@
 
 require_once('Funcoes.php');
 if(!isset($_REQUEST['op'])){
-    listarClientes();
+    listarbixos();
     exit;
 }
 $opcao = strip_tags($_REQUEST['op']);
 
 switch($opcao){
     case 'excluir':
-        excluirCliente();
+        excluirbixo();
         break;
     
     case 'editar':
-        editarCliente();
+        editarbixo();
         break;
     
     case 'atualizar':
-        atualizarCliente();
+        atualizarbixo();
         break;
     
     default:
-        listarClientes();
+        listarbixos();
         break;
      
 }
 
-function carregarFotoCliente($arquivoEmProcesso, $idCliente)
+function carregarFotoBixo($arquivoEmProcesso, $idbixo)
 {
     
     $mimesValidos = [
@@ -36,35 +36,35 @@ function carregarFotoCliente($arquivoEmProcesso, $idCliente)
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idCliente.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idbixo.'.png');   
     }
     return $validacao;
 }
 
-function excluirCliente()
+function excluirbixo()
 {
 
     if(!isset($_GET['id'])){
         header('Location: ListaBixo.php?erro=1');
         exit;
     }
-    $idCliente = strip_tags($_GET['id']);
+    $idbixo = strip_tags($_GET['id']);
     
-    header('Location: listaBixo.php?excluido=' . $idCliente);
+    header('Location: listaBixo.php?excluido=' . $idbixo);
     exit;
 }
 
-function editarCliente()
+function editarbixo()
 {
     if(!isset($_GET['id'])){
         header('Location: listaBixo.php?erro=404');
         exit;
     }
-    $idCliente = strip_tags($_GET['id']);
+    $idbixo = strip_tags($_GET['id']);
 
 
 
-    $dadosCliente = 
+    $dadosbixo = 
         [
             1=>[
                 'id'            => 1,
@@ -75,8 +75,8 @@ function editarCliente()
                 'defesa'        => 40,
                 'latitude'      => 1254,
                 'longitude'     => 6544,
-                'descImg'       => 'bixo' . $idCliente . '.png',
-                'img'           => '../public/imgs/bixo' . $idCliente . '.png'
+                'descImg'       => 'bixo' . $idbixo . '.png',
+                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
             ],
             2=>[
                 'id'            => 2,
@@ -87,8 +87,8 @@ function editarCliente()
                 'defesa'        => 50,
                 'latitude'      => 6655,
                 'longitude'     => 6547,
-                'descImg'       => 'bixo' . $idCliente . '.png',
-                'img'           => '../public/imgs/bixo' . $idCliente . '.png'
+                'descImg'       => 'bixo' . $idbixo . '.png',
+                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
             ],
             3=>[
                 'id'        => 3,
@@ -99,8 +99,8 @@ function editarCliente()
                 'defesa'        => 60,
                 'latitude'      => 5544,
                 'longitude'     => 9877,
-                'descImg'       => 'bixo' . $idCliente . '.png',
-                'img'           => '../public/imgs/bixo' . $idCliente . '.png'
+                'descImg'       => 'bixo' . $idbixo . '.png',
+                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
             ]
         ];
     require_once('cadastrobixo.php');
@@ -109,7 +109,7 @@ function editarCliente()
 }
 
 
-function atualizarCliente()
+function atualizarbixo()
 {
        
     if(empty($_POST['nome']) || empty($_POST['descricaoBixo'])){
@@ -117,13 +117,13 @@ function atualizarCliente()
         exit;
     }
     if(!empty($_FILES['foto'])){
-        $carregou = carregarFotoCliente($_FILES['foto'], $_POST['id']);
+        $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
     }
     header('Location: listaBixo.php?atualizado=' . ($_POST['nome']));
     exit;    
 }
 
-function listarClientes(){
+function listarbixos(){
     
     header('Location: listaBixo.php');
     exit;
