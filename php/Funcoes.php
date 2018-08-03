@@ -1,6 +1,5 @@
 <?php
 
-require_once('Funcoes.php');
 if(!isset($_REQUEST['op'])){
     listarbixos();
     exit;
@@ -91,9 +90,9 @@ function editarbixo()
                 'img'           => '../public/imgs/bixo' . $idbixo . '.png'
             ],
             3=>[
-                'id'        => 3,
-                'nome'      => 'Tomba',
-                'descricaoBixo'  => 'Tomba lata, ou Vira-Latas',
+                'id'            => 3,
+                'nome'          => 'Tomba',
+                'descricaoBixo' => 'Tomba lata, ou Vira-Latas',
                 'vida'          => 80,
                 'ataque'        => 20,
                 'defesa'        => 60,
@@ -110,10 +109,9 @@ function editarbixo()
 
 
 function atualizarbixo()
-{
-       
-    if(empty($_POST['nome']) || empty($_POST['descricaoBixo'])){
-        header('Location: cadastrobixo.php?op=editar&id=' . $_POST['id']);
+{       
+    if(empty($_POST['nome'])){
+        header('Location: cadastrobixo.php');
         exit;
     }
     if(!empty($_FILES['foto'])){

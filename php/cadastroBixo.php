@@ -30,11 +30,11 @@
 
     <div id="menuLateral" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="php/cadastroBixo.php">Cadastro bixo</a>
-        <a href="php/ListaBixo.php">Lista de bixo</a>
-        <a href="cadastroJogador.html">Cadastro jogador</a>
-        <a href="cadastroitem.html">Cadastro item</a>
-        <a href="mapa.html">Mapa</a>
+        <a href="cadastroBixo.php">Cadastro bixo</a>
+        <a href="ListaBixo.php">Lista de bixo</a>
+        <a href="../cadastroJogador.html">Cadastro jogador</a>
+        <a href="../cadastroitem.html">Cadastro item</a>
+        <a href="../mapa.html">Mapa</a>
         <img class="logoimg" src="../img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
     </div>    
@@ -52,7 +52,8 @@
                         <div class="form-row">
                             <div class="col-md-12">
                                 <label for="inputNome">Nome</label>
-                                <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome Bicho" value="<?=$bixos[$idbixo]['nome'];?>">
+                                <input type="text" class="form-control" name="nome" id="inputNome" placeholder="Nome Bicho" 
+                                    value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['nome'] : '';?>">
                             </div>                            
                         </div>
                     </div>
@@ -60,11 +61,12 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
-                                <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" value="<?=$bixos[$idbixo]['descricaoBixo'];?>">
+                                <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" 
+                                    value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['descricaoBixo'] : '';?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
-                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['vida'];?>">
+                                <input type="number" class="form-control" name="Vida" min="0" max="100" step="10" placeholder="0" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['vida'] : '';?>">
                             </div>                         
                         </div>
                     </div>
@@ -72,11 +74,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Ataque</label>
-                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['ataque'];?>"> 
+                                <input type="number" class="form-control" name="Ataque" min="0" max="100" step="10" placeholder="0" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['ataque'] : '';?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Defesa</label>
-                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0" value="<?=$bixos[$idbixo]['defesa'];?>">
+                                <input type="number" class="form-control" name="ValorDefesa" min="0" max="100" step="10" placeholder="0" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['defesa'] : '';?>">
                             </div>                                                     
                         </div>
                     </div>
@@ -84,11 +86,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputAtaque">Latitude</label>
-                                <input type="number" class="form-control" name="Latitude" min="0" value="<?=$bixos[$idbixo]['latitude'];?>"> 
+                                <input type="number" class="form-control" name="Latitude" min="0" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['latitude'] : '';?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputDefesa">Longitude</label>
-                                <input type="number" class="form-control" name="Longitude" min="0" value="<?=$bixos[$idbixo]['longitude'];?>">
+                                <input type="number" class="form-control" name="Longitude" min="0" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['longitude'] : '';?>">
                             </div>
                                                         
                         </div>
@@ -99,7 +101,7 @@
                                 <div class="col-md-10">
                                     <label for="customFileLang">Imagem Bixo</label>
                                     <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="" value="<?=$bixos[$idbixo]['descImg'];?>">
+                                        <input type="text" class="form-control" readonly="" value="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['descImg'] : '';?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
                                                 Buscar <input type="file" style="display: none;" multiple="" name="foto" accept="image/*"> 
@@ -108,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <img src="<?=$bixos[$idbixo]['img'];?>" height="90px" width="90px" style="border-radius: 50%;">
+                                    <img src="<?=(isset($_GET['id'])) ? $dadosbixo[$idbixo]['img'] : '../public/imgs/padrao.png' ?>" height="90px" width="90px" style="border-radius: 50%;">
                                 </div>
                             </div>
                         </div>

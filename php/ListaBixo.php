@@ -32,11 +32,11 @@
 
     <div id="menuLateral" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="php/cadastroBixo.php">Cadastro bixo</a>
-        <a href="php/ListaBixo.php">Lista de bixo</a>
-        <a href="cadastroJogador.html">Cadastro jogador</a>
-        <a href="cadastroitem.html">Cadastro item</a>
-        <a href="mapa.html">Mapa</a>
+        <a href="cadastroBixo.php">Cadastro bixo</a>
+        <a href="ListaBixo.php">Lista de bixo</a>
+        <a href="../cadastroJogador.html">Cadastro jogador</a>
+        <a href="../cadastroitem.html">Cadastro item</a>
+        <a href="../mapa.html">Mapa</a>
         <img class="logoimg" src="../img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
     </div>    
