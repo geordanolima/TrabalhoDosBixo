@@ -51,11 +51,17 @@
                         if(isset($_GET['excluido'])){
                     ?>
                     <div class="alert alert-danger" role="alert"> 
-                        O cliente <?=$_GET['excluido']?> foi excluido!
+                        O bixo <?=$_GET['excluido']?> foi excluido!
                     </div>
-                   <?php }
-                    ?>
-                    
+                   <?php } else if (isset($_GET['atualizado'])){ ?>
+                    <div class="alert alert-warning" role="alert"> 
+                        O bixo <?=$_GET['atualizado']?> foi alterado!
+                    </div>
+                    <?php } else if (isset($_GET['erro']) && ($_GET['erro']=='404')){ ?>
+                    <div class="alert alert-danger" role="alert"> 
+                        Erro! Bixo morreu!
+                    </div>
+                    <?php } ?>                  
                         
                 </div>
                 <div class="card-body">

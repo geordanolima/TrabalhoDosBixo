@@ -8,7 +8,6 @@ if(!isset($_REQUEST['op'])){
 $opcao = strip_tags($_REQUEST['op']);
 
 switch($opcao){
-
     case 'excluir':
         excluirCliente();
         break;
@@ -24,10 +23,12 @@ switch($opcao){
     default:
         listarClientes();
         break;
+     
 }
 
-function carregarFotoCliente($arquivoEmProcesso, $nomeCliente)
+function carregarFotoCliente($arquivoEmProcesso, $idCliente)
 {
+    
     $mimesValidos = [
         'image/png',
         'image/jpg',
@@ -35,7 +36,7 @@ function carregarFotoCliente($arquivoEmProcesso, $nomeCliente)
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], './public/imgs/'.$nomeCliente.'.jpg');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idCliente.'.png');   
     }
     return $validacao;
 }
@@ -44,7 +45,7 @@ function excluirCliente()
 {
 
     if(!isset($_GET['id'])){
-        header('Location: ../ListaBixo.php?erro=1');
+        header('Location: ListaBixo.php?erro=1');
         exit;
     }
     $idCliente = strip_tags($_GET['id']);
@@ -56,7 +57,7 @@ function excluirCliente()
 function editarCliente()
 {
     if(!isset($_GET['id'])){
-        header('Location: listaBixo.php?erro=1');
+        header('Location: listaBixo.php?erro=404');
         exit;
     }
     $idCliente = strip_tags($_GET['id']);
@@ -70,8 +71,8 @@ function editarCliente()
                 'nome'          => 'Cusco',
                 'descricaoBixo' => 'tambem conhecido como cachorro',
                 'vida'          => 10,
-                'ataque'        => 17,
-                'defesa'        => 32,
+                'ataque'        => 20,
+                'defesa'        => 40,
                 'latitude'      => 1254,
                 'longitude'     => 6544,
                 'descImg'       => 'bixo' . $idCliente . '.png',
@@ -81,9 +82,9 @@ function editarCliente()
                 'id'            => 2,
                 'nome'          => 'Guaipeca',
                 'descricaoBixo' => 'Melhor amigo do Gaucho',
-                'vida'          => 35,
-                'ataque'        => 11,
-                'defesa'        => 51,
+                'vida'          => 30,
+                'ataque'        => 10,
+                'defesa'        => 50,
                 'latitude'      => 6655,
                 'longitude'     => 6547,
                 'descImg'       => 'bixo' . $idCliente . '.png',
@@ -93,9 +94,9 @@ function editarCliente()
                 'id'        => 3,
                 'nome'      => 'Tomba',
                 'descricaoBixo'  => 'Tomba lata, ou Vira-Latas',
-                'vida'          => 85,
-                'ataque'        => 33,
-                'defesa'        => 12,
+                'vida'          => 80,
+                'ataque'        => 20,
+                'defesa'        => 60,
                 'latitude'      => 5544,
                 'longitude'     => 9877,
                 'descImg'       => 'bixo' . $idCliente . '.png',
@@ -108,24 +109,22 @@ function editarCliente()
 }
 
 
+function atualizarCliente()
+{
+       
+    if(empty($_POST['nome']) || empty($_POST['descricaoBixo'])){
+        header('Location: cadastrobixo.php?op=editar&id=' . $_POST['id']);
+        exit;
+    }
+    if(!empty($_FILES['foto'])){
+        $carregou = carregarFotoCliente($_FILES['foto'], $_POST['id']);
+    }
+    header('Location: listaBixo.php?atualizado=' . ($_POST['nome']));
+    exit;    
+}
+
 function listarClientes(){
-
-    $dadosCliente = 
-    [
-        1=>[
-            'id'            => 1,
-            'nome'          => 'Cusco'
-        ],
-        2=>[
-            'id'            => 2,
-            'nome'          => 'Guaipeca'
-        ],
-        3=>[
-            'id'        => 3,
-            'nome'      => 'Tomba'
-        ]
-    ];
-
+    
     header('Location: listaBixo.php');
     exit;
 }

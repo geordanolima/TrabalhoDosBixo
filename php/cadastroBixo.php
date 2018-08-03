@@ -45,8 +45,9 @@
         <div class="card card-register ">
             <div class="card-header">Cadastrar um bicho:</div>
             <div class="card-body">
-                <form>
-                    <input type="hidden" name="id" value="<?=$dadosCliente['id'];?>">
+                <form method="post" action="Funcoes.php" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?=$idCliente;?>">
+                <input type="hidden" name="op" value="atualizar">
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-md-12">
@@ -59,7 +60,7 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
-                                <input type="text" class="form-control" name="DescricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['descricaoBixo'];?>">
+                                <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" value="<?=$dadosCliente[$idCliente]['descricaoBixo'];?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
@@ -101,7 +102,7 @@
                                         <input type="text" class="form-control" readonly="" value="<?=$dadosCliente[$idCliente]['descImg'];?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
-                                                Buscar <input type="file" style="display: none;" multiple=""> 
+                                                Buscar <input type="file" style="display: none;" multiple="" name="foto" accept="image/*"> 
                                             </span>
                                         </label>
                                     </div>
@@ -112,8 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Salvar</button>
-                    
+                    <input type="submit" class="btn btn-primary btn-block" value="Atualizar">
                 </form>
             </div>
         </div>
