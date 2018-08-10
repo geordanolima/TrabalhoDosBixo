@@ -4,6 +4,12 @@
     Madson N
     Rafael T
     Tiago W -->
+<?php
+    session_start();
+    if(!isset($_SESSION['logado'])){
+        header('Location: login.php');
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,6 +50,7 @@
         <a href="mapa.html">Mapa</a>
         <img class="logoimg" src="img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
+        <a href="logout.php">Sair</a>
     </div>    
 
     <div id="map" class="mapa">

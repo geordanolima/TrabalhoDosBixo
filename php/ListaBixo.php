@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['logado'])){
+        header('Location: ../login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -36,7 +42,7 @@
         <a href="ListaBixo.php">Lista de bixo</a>
         <a href="../cadastroJogador.html">Cadastro jogador</a>
         <a href="../cadastroitem.html">Cadastro item</a>
-        <a href="../mapa.html">Mapa</a>
+        <a href="../mapa.php">Mapa</a>
         <img class="logoimg" src="../img/dog-w.png">
         <label class="logo">Joguinho dos bixo</label>
     </div>    

@@ -16,18 +16,18 @@ function openNav() {
     }
 }
 
-function logar() {
+// function logar() {
     
-    if (document.getElementById('EmailLogin').value == 'bixo@joguinho.com') {
-        if ((document.getElementById('SenhaLogin').value == 'admin')){
-            window.location.href = "mapa.html";
-        } else{
-            document.getElementById('corpo').innerHTML= '<div class="alert alert-danger"  role="alert">Senha incorreta </div>';
-        }
-    } else{
-        document.getElementById('corpo').innerHTML= '<div class="alert alert-danger"  role="alert">Email incorreto </div>';
-    }
-}
+//     if (document.getElementById('EmailLogin').value == 'bixo@joguinho.com') {
+//         if ((document.getElementById('SenhaLogin').value == 'admin')){
+//             window.location.href = "mapa.html";
+//         } else{
+//             document.getElementById('corpo').innerHTML= '<div class="alert alert-danger"  role="alert">Senha incorreta </div>';
+//         }
+//     } else{
+//         document.getElementById('corpo').innerHTML= '<div class="alert alert-danger"  role="alert">Email incorreto </div>';
+//     }
+// }
 
 
 $(function() {

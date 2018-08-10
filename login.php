@@ -24,7 +24,7 @@
 </head>
     <body >
         
-        <form class="container login p-4">
+        <form class="container login p-4" action="php/funcoes.php" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="EmailLogin" placeholder="email@examplo.com">
@@ -39,11 +39,19 @@
                     Lembrar-me
                 </label>
             </div>
-            
+            <input type="hidden" name="op" value="logar">
                 <button type="reset" class="btn btn-secundary left">Cadastrar</button>
-                <button type="button" class="btn btn-primary left" onclick="logar()"> Login </button>
+                <button type="submit" class="btn btn-primary left"> Login </button>
                 <span id="corpo" style="display: inline; padding-top: 15px;"></span>
         </form>
+
+        <?php
+        if(isset($_GET['deslogado'])) {
+        ?>
+            <div class="alert alert-danger" role="alert"> 
+               O Mamute Morreu!
+            </div>  
+        <?php } ?>
         <div class="card-footer" id="rodape">
             Joguinho maroto dos bixo TADS V @2018
         </div>
