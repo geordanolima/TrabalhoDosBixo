@@ -27,11 +27,11 @@
         <form class="container login p-4" action="php/funcoes.php" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="EmailLogin" placeholder="email@examplo.com">
+                <input type="email" class="form-control" id="EmailLogin" name="email" placeholder="email@examplo.com">
             </div>
             <div class="form-group">
                 <label for="Senha">Senha</label>
-                <input type="password" class="form-control" id="SenhaLogin" placeholder="Senha">
+                <input type="password" class="form-control" id="SenhaLogin" name="senha" placeholder="Senha">
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="dropdownCheck2">
@@ -51,6 +51,10 @@
             <div class="container alert alert-danger p-4 col-2 mt-3" role="alert"> 
                O Mamute Morreu!
             </div>  
+        <?php } else if(isset($_GET['erro'])){ ?>
+            <div class="container alert alert-danger p-4 col-2 mt-3" role="alert"> 
+               Ta sabendo de nada tchê!
+            </div>
         <?php } ?>
         <div class="card-footer" id="rodape">
             Joguinho maroto dos bixo TADS V @2018

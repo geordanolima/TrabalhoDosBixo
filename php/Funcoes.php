@@ -1,46 +1,38 @@
 <?php
 
 session_start();
-session_regenerate_id();
-//fingi que pesquisei as  credenciais no BD
-//usuario é quem realmente diz que é
-// session_regenerate_id();
-//af6o5cfqg9c4lgu2lvuocfr154
-//lbf7g62dcqf2ofmj4n3tvsq1b2
 
-$opcao = strip_tags($_REQUEST['op']);
+if (isset($_REQUEST['op'])){
+    $opcao = strip_tags($_REQUEST['op']);
 
-switch($opcao){
-    case 'excluir':
-        excluirbixo();
-        break;
-    
-    case 'editar':
-        editarbixo();
-        break;
-    
-    case 'atualizar':
-        atualizarbixo();
-        break;
+    switch($opcao){
+        case 'excluir':
+            excluirbixo();
+            break;
+        
+        case 'editar':
+            editarbixo();
+            break;
+        
+        case 'atualizar':
+            atualizarbixo();
+            break;
 
-    case 'logar':
-        logar();
-        break;
+        case 'logar':
+            logar();
+            break;
 
-    case 'Maligna':
-        deslogar();
-        break;
-    
-    case 'listar':
-        listarbixos();
-        break;
-    case 'sair':
-        logout();
-        break;
-    default:
-        AbreMapa();
-        break;
-     
+        case 'Maligna':
+            deslogar();
+            break;
+        
+        case 'listar':
+            listarbixos();
+            break;
+        case 'sair':
+            logout();
+            break;    
+    }   
 }
 
 function carregarFotoBixo($arquivoEmProcesso, $idbixo)
@@ -145,12 +137,6 @@ function listarbixos(){
     exit;
 }
 
-function AbreMapa(){
-    header('Location: mapa.php');
-    exit; 
-}
-
-
 function contadorVisutas(){
     if (!isset($_COOKIE['visitas'])){
         setcookie('visitas', '1',time() + 150000);
@@ -161,18 +147,35 @@ function contadorVisutas(){
     return $variavil;
 }
 
+/*  funções de login */
 
 function logar(){
-    
-    $_SESSION['nome'] = 'Vivente';
-    $_SESSION['logado'] = true;
-
-    //require_once('menu.php');
-    header('Location: mapa.php');
+    if (($_POST['email'] =='bixo@joguinho.com') && ($_POST['senha'] == 'admin')) {
+        session_regenerate_id();
+        $_SESSION['nome'] = 'Vivente';
+        $_SESSION['logado'] = true;
+        $_SESSION["sessiontime"] = time() + 3600;    
+        header('Location: mapa.php');    
+    } else {
+        header('Location: ../login.php?erro=LoginInvalido'); 
+    }
 }
 
 function logout(){
 
     session_destroy();
     header('Location: ../login.php?deslogado=true');
+}
+
+function isAutenticado(){
+    
+    if ( isset( $_SESSION["sessiontime"] ) ) { 
+        if ($_SESSION["sessiontime"] < time() ) { 
+            session_unset();
+            header('Location: funcoes.php?op=sair');
+        }
+    } else { 
+        session_unset();
+        header('Location: ../login.php');
+    }
 }
