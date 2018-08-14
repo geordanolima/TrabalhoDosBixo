@@ -4,6 +4,7 @@
         header('Location: ../login.php');
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -37,14 +38,19 @@
         </div>
 
     <div id="menuLateral" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <?php
+            if(isset($_SESSION['nome'])) {
+            ?>
+            <a id="buena" href="#"> Buenas <?=$_SESSION['nome']?> !</a>  
+        <?php } ?>
         <a href="cadastroBixo.php">Cadastro bixo</a>
         <a href="ListaBixo.php">Lista de bixo</a>
-        <a href="../cadastroJogador.html">Cadastro jogador</a>
-        <a href="../cadastroitem.html">Cadastro item</a>
-        <a href="../mapa.php">Mapa</a>
-        <img class="logoimg" src="../img/dog-w.png">
+        <a href="cadastroJogador.php">Cadastro jogador</a>
+        <a href="cadastroitem.php">Cadastro item</a>
+        <a href="mapa.php">Mapa</a>
+        <img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">
         <label class="logo">Joguinho dos bixo</label>
+        <a href="funcoes.php?op=sair">Sair</a>
     </div>    
 
  <!-- ############################################################################### -->

@@ -48,7 +48,7 @@
         <?php
         if(isset($_GET['deslogado'])) {
         ?>
-            <div class="alert alert-danger" role="alert"> 
+            <div class="container alert alert-danger p-4 col-2 mt-3" role="alert"> 
                O Mamute Morreu!
             </div>  
         <?php } ?>

@@ -31,8 +31,14 @@ switch($opcao){
         deslogar();
         break;
     
-    default:
+    case 'listar':
         listarbixos();
+        break;
+    case 'sair':
+        logout();
+        break;
+    default:
+        AbreMapa();
         break;
      
 }
@@ -139,6 +145,11 @@ function listarbixos(){
     exit;
 }
 
+function AbreMapa(){
+    header('Location: mapa.php');
+    exit; 
+}
+
 
 function contadorVisutas(){
     if (!isset($_COOKIE['visitas'])){
@@ -153,14 +164,15 @@ function contadorVisutas(){
 
 function logar(){
     
-    $_SESSION['nome'] = 'Nome Completo';
+    $_SESSION['nome'] = 'Vivente';
     $_SESSION['logado'] = true;
 
     //require_once('menu.php');
     header('Location: mapa.php');
 }
 
-function deslogar(){
+function logout(){
+
     session_destroy();
-    header('Location: login.php?deslogado=true');
+    header('Location: ../login.php?deslogado=true');
 }

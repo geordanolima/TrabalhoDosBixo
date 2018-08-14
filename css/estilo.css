@@ -6,11 +6,7 @@ body{
     font-family: "Lato", sans-serif;
 }
 
-.logoimg{
-    margin-top: 90%;
-    margin-left: 30px;
-    position: relative;
-}
+
 .logo {
     color: #FFF;
     margin-left: 30px;
@@ -59,6 +55,8 @@ body{
     color: #f1f1f1;
 }
 
+
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;
@@ -70,6 +68,7 @@ body{
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+  .sidenav p {font-size: 18px;}
 }
 
 #rodape{
@@ -102,3 +101,5 @@ body{
       margin-left: 270px;
       width: 85%;
   }
+
+

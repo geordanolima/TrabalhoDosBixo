@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['logado'])){
+        header('Location: ../login.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,11 +13,11 @@
       <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
     
 
-    <link rel="icon" href="img/dog-w.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="img/dog-w.png" type="image/x-icon" />
+    <link rel="icon" href="../img/dog-w.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/dog-w.png" type="image/x-icon" />
 
     <title>Cadastro do Item</title>
 
@@ -21,7 +27,7 @@
         <div class="pos-f-t">
             <nav class="navbar navbar-dark bg-dark fixed-top 5-col">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
-                    <span> <img src="img/dog-w.png" style="width: 30px; height: 35px;"></span>
+                    <span> <img src="../img/dog-w.png" style="width: 30px; height: 35px;"></span>
                     <label>
                         Joguinho dos bixo
                     </label>
@@ -31,26 +37,24 @@
         </div>
 
     <div id="menuLateral" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="php/cadastroBixo.php">Cadastro bixo</a>
-        <a href="php/ListaBixo.php">Lista de bixo</a>
-        <a href="cadastroJogador.html">Cadastro jogador</a>
-        <a href="cadastroitem.html">Cadastro item</a>
+        <?php
+            if(isset($_SESSION['nome'])) {
+            ?>
+            <a id="buena" href="#"> Buenas <?=$_SESSION['nome']?> !</a>  
+        <?php } ?>
+        <a href="cadastroBixo.php">Cadastro bixo</a>
+        <a href="ListaBixo.php">Lista de bixo</a>
+        <a href="cadastroJogador.php">Cadastro jogador</a>
+        <a href="cadastroitem.php">Cadastro item</a>
         <a href="mapa.php">Mapa</a>
-        <img class="logoimg" src="img/dog-w.png">
+        <img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">
         <label class="logo">Joguinho dos bixo</label>
+        <a href="funcoes.php?op=sair">Sair</a>
     </div>    
 
  <!-- ############################################################################### -->
     
     <div class="container cadastro">
-
-            <photos page="1" pages="1" perpage="500" total="2">
-                    <photo id="2822546461" owner="78398753@N00" secret="2dbcdb589f" server="1" farm="1" title="FOO" ispublic="1" isfriend="0" isfamily="0" is_primary="1" has_comment="1">
-                      <comment>best cat picture ever!</comment>
-                    </photo>
-                    <photo id="2822544806" owner="78398753@N00" secret="bd93cbe917" server="1" farm="1" title="OOK" ispublic="1" isfriend="0" isfamily="0" is_primary="0" has_comment="0" />
-                  </photos>
 
             <div class="card card-register ">
                 <div class="card-header">Cadastrar um Item:</div>
@@ -109,6 +113,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
