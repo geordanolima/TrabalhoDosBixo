@@ -99,7 +99,7 @@
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputJogador2">Nome</label>
-                                    <input type="text" class="form-control" id="inputJogador2" value="Maria" disabled>
+                                    <input type="text" class="form-control" id="inputJogador2" value="Fordencia" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
