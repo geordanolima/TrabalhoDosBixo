@@ -7,24 +7,24 @@ if (isset($_REQUEST['op'])){
 
     switch($opcao){
         case 'excluir':
-            excluirbixo();
+            excluirjogador();
             break;
         
         case 'editar':
-            editarbixo();
+            editarjogador();
             break;
         
         case 'atualizar':
-            atualizarbixo();
+            atualizarjogador();
             break;
                 
         case 'listar':
-            listarbixos();
+            listarjogador();
             break;
     }   
 }
 
-function carregarFotoBixo($arquivoEmProcesso, $idbixo)
+function carregarFotoJogador($arquivoEmProcesso, $idjogador)
 {
     
     $mimesValidos = [
@@ -34,126 +34,85 @@ function carregarFotoBixo($arquivoEmProcesso, $idbixo)
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idbixo.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idjogador.'.png');   
     }
     return $validacao;
 }
 
-function excluirbixo()
+function excluirjogador()
 {
 
     if(!isset($_GET['id'])){
-        header('Location: ListaBixo.php?erro=1');
+        header('Location: ListaJogador.php?erro=1');
         exit;
     }
     $idbixo = strip_tags($_GET['id']);
     
-    header('Location: listaBixo.php?excluido=' . $idbixo);
+    header('Location: listaJogador.php?excluido=' . $idbixo);
     exit;
 }
 
-function editarbixo()
+function editarjogador()
 {
     if(!isset($_GET['id'])){
-        header('Location: listaBixo.php?erro=404');
+        header('Location: listaJogador.php?erro=404');
         exit;
     }
-    $idbixo = strip_tags($_GET['id']);
+    $idjogador = strip_tags($_GET['id']);
 
-
-
-    $dadosbixo = 
+    $dadosjogador = 
         [
             1=>[
                 'id'            => 1,
-                'nome'          => 'Cusco',
-                'descricaoBixo' => 'tambem conhecido como cachorro',
-                'vida'          => 10,
-                'ataque'        => 20,
-                'defesa'        => 40,
-                'latitude'      => 1254,
-                'longitude'     => 6544,
-                'descImg'       => 'bixo' . $idbixo . '.png',
-                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
+                'nome'          => 'Zezao',
+                'apelido'       => 'Zezinho',
+                'genero'        => 'machao'
+                'e-mail'        => 'zezao@gmail.com'
+                'descImg'       => 'jogador' . $idjogador . '.png',
+                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ],
             2=>[
                 'id'            => 2,
-                'nome'          => 'Guaipeca',
-                'descricaoBixo' => 'Melhor amigo do Gaucho',
-                'vida'          => 30,
-                'ataque'        => 10,
-                'defesa'        => 50,
-                'latitude'      => 6655,
-                'longitude'     => 6547,
-                'descImg'       => 'bixo' . $idbixo . '.png',
-                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
+                'nome'          => 'Fordencia',
+                'apelido'       => 'Fordencinha',
+                'genero'        => 'machona'
+                'e-mail'        => 'fordencinha@gmail.com'
+                'descImg'       => 'jogador' . $idjogador . '.png',
+                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ],
             3=>[
                 'id'            => 3,
-                'nome'          => 'Tomba',
-                'descricaoBixo' => 'Tomba lata, ou Vira-Latas',
-                'vida'          => 80,
-                'ataque'        => 20,
-                'defesa'        => 60,
-                'latitude'      => 5544,
-                'longitude'     => 9877,
-                'descImg'       => 'bixo' . $idbixo . '.png',
-                'img'           => '../public/imgs/bixo' . $idbixo . '.png'
+                'nome'          => 'Jao',
+                'apelido'       => 'Jaozaço',
+                'genero'        => 'Indefinido'
+                'e-mail'        => 'jaozinho@gmail.com'
+                'descImg'       => 'jogador' . $idjogador . '.png',
+                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ]
         ];
-    require_once('cadastrobixo.php');
+    require_once('cadastroJogador.php');
     exit;
 
 }
 
 
-function atualizarbixo()
+function atualizarjogador()
 {       
     if(empty($_POST['nome'])){
-        header('Location: cadastrobixo.php');
+        header('Location: cadastroJogador.php');
         exit;
     }
     if(!empty($_FILES['foto'])){
-        $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
+        $carregou = carregarFotoJogador($_FILES['foto'], $_POST['id']);
     }
-    header('Location: listaBixo.php?atualizado=' . ($_POST['nome']));
+    header('Location: listaJogador.php?atualizado=' . ($_POST['nome']));
     exit;    
 }
 
-function listarbixos(){
+function listarjogador(){
     
     header('Location: listaBixo.php');
     exit;
-}
-
-function contadorVisutas(){
-    if (!isset($_COOKIE['visitas'])){
-        setcookie('visitas', '1',time() + 150000);
-    }
-    $variavil =  $_COOKIE['visitas'] + 1 ;
-    setcookie('visitas', $variavil);
-
-    return $variavil;
-}
-
-/*  funções de login */
-
-function logar(){
-    if (($_POST['email'] =='bixo@joguinho.com') && ($_POST['senha'] == 'admin')) {
-        session_regenerate_id();
-        $_SESSION['nome'] = 'Vivente';
-        $_SESSION['logado'] = true;
-        $_SESSION["sessiontime"] = time() + 3600;    
-        header('Location: mapa.php');    
-    } else {
-        header('Location: ../login.php?erro=LoginInvalido'); 
-    }
-}
-
-function logout(){
-
-    session_destroy();
-    header('Location: ../login.php?deslogado=true');
 }
 
 function isAutenticado(){
