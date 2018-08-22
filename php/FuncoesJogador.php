@@ -7,54 +7,72 @@ if (isset($_REQUEST['op'])){
 
     switch($opcao){
         case 'excluir':
-            excluirjogador();
+            excluirbixo();
             break;
         
         case 'editar':
-            editarjogador();
+            editarbixo();
             break;
-            
         
         case 'atualizar':
-            atualizarjogador();
+            atualizarbixo();
             break;
-
+                
         case 'listar':
-            listarjogador();
+            listarbixos();
             break;
     }   
 }
 
-function excluirjogador()
+function carregarFotoBixo($arquivoEmProcesso, $idbixo)
+{
+    
+    $mimesValidos = [
+        'image/png',
+        'image/jpg',
+        'image/jpeg'
+    ];
+    $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
+    if($validacao){
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idbixo.'.png');   
+    }
+    return $validacao;
+}
+
+function excluirbixo()
 {
 
     if(!isset($_GET['id'])){
-        header('Location: ListaJogador.php?erro=1');
+        header('Location: ListaBixo.php?erro=1');
         exit;
     }
     $idbixo = strip_tags($_GET['id']);
     
-    header('Location: listaJogador.php?excluido=' . $idbixo);
+    header('Location: listaBixo.php?excluido=' . $idbixo);
     exit;
 }
 
 function editarbixo()
 {
     if(!isset($_GET['id'])){
-        header('Location: listaJogador.php?erro=404');
+        header('Location: listaBixo.php?erro=404');
         exit;
     }
     $idbixo = strip_tags($_GET['id']);
 
-    $dadosbixo = ///
+
+
+    $dadosbixo = 
         [
             1=>[
                 'id'            => 1,
-                'nome'          => 'Zezao',
-                'apelido'       => 'Ze',
-                'genero'        => 10,
-                'email'         => 20,
+                'nome'          => 'Cusco',
+                'descricaoBixo' => 'tambem conhecido como cachorro',
+                'vida'          => 10,
+                'ataque'        => 20,
                 'defesa'        => 40,
+                'latitude'      => 1254,
+                'longitude'     => 6544,
                 'descImg'       => 'bixo' . $idbixo . '.png',
                 'img'           => '../public/imgs/bixo' . $idbixo . '.png'
             ],
@@ -87,6 +105,7 @@ function editarbixo()
     exit;
 
 }
+
 
 function atualizarbixo()
 {       
