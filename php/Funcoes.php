@@ -12,8 +12,7 @@ if (isset($_REQUEST['op'])){
         
         case 'editar':
             editarjogador();
-            break;
-            
+            break;            
         
         case 'atualizar':
             atualizarjogador();
