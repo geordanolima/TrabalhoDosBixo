@@ -13,6 +13,7 @@ if (isset($_REQUEST['op'])){
         case 'editar':
             editarbixo();
             break;
+            
         
         case 'atualizar':
             atualizarbixo();
