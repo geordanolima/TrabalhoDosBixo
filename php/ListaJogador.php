@@ -1,5 +1,5 @@
 <?php
-    require_once('funcoes.php');
+    require_once('FuncoesLogin.php');
     isAutenticado();
 ?>
 
@@ -49,7 +49,7 @@
         <a href="mapa.php">Mapa</a>
         <img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">
         <label class="logo">Joguinho dos bixo</label>
-        <a href="funcoes.php?op=sair">Sair</a>
+        <a href="FuncoesLogin.php?op=sair">Sair</a>
     </div>    
 
  <!-- ############################################################################### -->
@@ -86,10 +86,10 @@
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                                            <a href="FuncoesJogador.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesJogador.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -99,15 +99,15 @@
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <label for="inputJogador2">Nome</label>
-                                    <input type="text" class="form-control" id="inputJogador2" value="Fordencia" disabled>
+                                    <input type="text" class="form-control" id="inputJogador2" value="Maria" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="Funcoes.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="FuncoesJogador.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesJogador.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -122,10 +122,10 @@
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="Funcoes.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="FuncoesJogador.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesJogador.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>

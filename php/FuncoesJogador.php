@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
 
@@ -58,6 +56,7 @@ function editarjogador()
         header('Location: listaJogador.php?erro=404');
         exit;
     }
+    
     $idjogador = strip_tags($_GET['id']);
 
     $dadosjogador = 
@@ -66,8 +65,8 @@ function editarjogador()
                 'id'            => 1,
                 'nome'          => 'Zezao',
                 'apelido'       => 'Zezinho',
-                'genero'        => 'machao'
-                'e-mail'        => 'zezao@gmail.com'
+                'genero'        => 'machao',
+                'email'         => 'zezao@gmail.com',
                 'descImg'       => 'jogador' . $idjogador . '.png',
                 'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ],
@@ -75,8 +74,8 @@ function editarjogador()
                 'id'            => 2,
                 'nome'          => 'Fordencia',
                 'apelido'       => 'Fordencinha',
-                'genero'        => 'machona'
-                'e-mail'        => 'fordencinha@gmail.com'
+                'genero'        => 'machona',
+                'email'        => 'fordencinha@gmail.com',
                 'descImg'       => 'jogador' . $idjogador . '.png',
                 'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ],
@@ -84,13 +83,15 @@ function editarjogador()
                 'id'            => 3,
                 'nome'          => 'Jao',
                 'apelido'       => 'Jaozaço',
-                'genero'        => 'Indefinido'
-                'e-mail'        => 'jaozinho@gmail.com'
+                'genero'        => 'Indefinido',
+                'email'        => 'jaozinho@gmail.com',
                 'descImg'       => 'jogador' . $idjogador . '.png',
                 'img'           => '../public/imgs/bixo' . $idjogador . '.png'
             ]
         ];
+    
     require_once('cadastroJogador.php');
+    header('Location: cadastroJogador.php');
     exit;
 
 }
@@ -113,17 +114,4 @@ function listarjogador(){
     
     header('Location: listaBixo.php');
     exit;
-}
-
-function isAutenticado(){
-    
-    if ( isset( $_SESSION["sessiontime"] ) ) { 
-        if ($_SESSION["sessiontime"] < time() ) { 
-            session_unset();
-            header('Location: funcoes.php?op=sair');
-        }
-    } else { 
-        session_unset();
-        header('Location: ../login.php');
-    }
 }

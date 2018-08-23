@@ -24,7 +24,7 @@
 </head>
     <body >
         
-        <form class="container login p-4" action="php/funcoes.php" method="post">
+        <form class="container login p-4" action="php/FuncoesLogin.php" method="post">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="EmailLogin" name="email" placeholder="email@examplo.com">

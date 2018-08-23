@@ -1,5 +1,5 @@
 <?php
-    require_once('funcoes.php');
+    require_once('FuncoesLogin.php');
     isAutenticado();
 ?>
 
@@ -47,7 +47,7 @@
         <a href="mapa.php">Mapa</a>
         <img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">
         <label class="logo">Joguinho dos bixo</label>
-        <a href="funcoes.php?op=sair">Sair</a>
+        <a href="FuncoesLogin.php?op=sair">Sair</a>
     </div>    
 
     <!-- ############################################################################### -->
