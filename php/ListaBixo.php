@@ -57,7 +57,10 @@
     
     <div class="container cadastro">
             <div class="card card-register ">
-                <div class="card-header">Lista de Bixo:</div>
+                <div class="row card-header justify-content-between">
+                    <h5>Lista de Bixos:<h5>
+                    <a href="cadastroBixo.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>  
+                </div>
                 <div class="form-group">
                     <?php
                         if(isset($_GET['excluido'])){
