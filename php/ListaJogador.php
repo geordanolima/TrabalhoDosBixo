@@ -23,12 +23,11 @@
     
     <div class="container cadastro">
             <div class="card card-register ">
-                <div class="row card-header">
+                <div class="row card-header justify-content-between">
                     <h5>Lista de Jogadores:<h5>
-                    <a href="cadastroJogador.php" class="btn btn-block btn-success" role="button" aria-pressed="true">Cadastrar</a>
+                    <a href="cadastroJogador.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>  
                 </div>
                 <div class="form-group">
-                SCEEW
                     <?php
                         if(isset($_GET['excluido'])){
                     ?>
@@ -44,7 +43,7 @@
                         Erro! O Jogador morreu!
                     </div>
                     <?php } ?>                  
-                        
+                      
                 </div>
                 <div class="card-body">
                     <form>
