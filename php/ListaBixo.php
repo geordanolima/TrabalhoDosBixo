@@ -1,43 +1,77 @@
 <?php
-    require_once('FuncoesLogin.php');
-    isAutenticado();
+    session_start();
+    if(!isset($_SESSION['logado'])){
+        header('Location: ../login.php');
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php
-        require_once('Funcoeshtml.php');
-        montaHeader();
-    ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/estilo.css">
+    
+
+    <link rel="icon" href="../img/dog-w.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/dog-w.png" type="image/x-icon" />
+
     <title>Lista de bixo</title>
 
 </head>
 <body>
-    <?php
-        require_once('Funcoeshtml.php');
-        montamenu();
-    ?>    
+
+        <div class="pos-f-t">
+            <nav class="navbar navbar-dark bg-dark fixed-top 5-col">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onclick="openNav()">
+                    <span> <img src="../img/dog-w.png" style="width: 30px; height: 35px;"></span>
+                    <label>
+                        Joguinho dos bixo
+                    </label>
+                </button>
+            </nav>
+            
+        </div>
+
+    <div id="menuLateral" class="sidenav">
+        <?php
+            if(isset($_SESSION['nome'])) {
+            ?>
+            <a id="buena" href="#"> Buenas <?=$_SESSION['nome']?> !</a>  
+        <?php } ?>
+        <a href="cadastroBixo.php">Cadastro bixo</a>
+        <a href="ListaBixo.php">Lista de bixo</a>
+        <a href="cadastroJogador.php">Cadastro jogador</a>
+        <a href="cadastroitem.php">Cadastro item</a>
+        <a href="mapa.php">Mapa</a>
+        <img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">
+        <label class="logo">Joguinho dos bixo</label>
+        <a href="funcoes.php?op=sair">Sair</a>
+    </div>    
 
  <!-- ############################################################################### -->
     
     <div class="container cadastro">
             <div class="card card-register ">
-                <div class="card-header">Lista de Jogadores:</div>
+                <div class="card-header">Lista de Bixo:</div>
                 <div class="form-group">
                     <?php
                         if(isset($_GET['excluido'])){
                     ?>
                     <div class="alert alert-danger" role="alert"> 
-                        O Jogador <?=$_GET['excluido']?> foi excluido!
+                        O bixo <?=$_GET['excluido']?> foi excluido!
                     </div>
                    <?php } else if (isset($_GET['atualizado'])){ ?>
                     <div class="alert alert-warning" role="alert"> 
-                    O Jogador <?=$_GET['atualizado']?> foi alterado!
+                        O bixo <?=$_GET['atualizado']?> foi alterado!
                     </div>
                     <?php } else if (isset($_GET['erro']) && ($_GET['erro']=='404')){ ?>
                     <div class="alert alert-danger" role="alert"> 
-                    O Jogador Bixo morreu!
+                        Erro! Bixo morreu!
                     </div>
                     <?php } ?>                  
                         
@@ -47,16 +81,16 @@
                         <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 1)){ ?> style="visibility: hidden"<?php } ?>>
                             <div class="form-row" >
                                 <div class="col-md-9">
-                                    <label for="inputJogador1">Nome</label>
-                                    <input type="text" class="form-control" id="inputJogador1"  value="Zezao" disabled>
+                                    <label for="inputBixo1">Nome</label>
+                                    <input type="text" class="form-control" id="inputBixo1"  value="Cusco" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                            <a href="FuncoesJogador.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                                            <a href="Funcoes.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="FuncoesJogador.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -65,8 +99,8 @@
                         <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 2)){ ?> style="visibility: hidden"<?php } ?>>
                             <div class="form-row">
                                 <div class="col-md-9">
-                                    <label for="inputJogador2">Nome</label>
-                                    <input type="text" class="form-control" id="inputJogador2" value="Fordencia" disabled>
+                                    <label for="inputBixo2">Nome</label>
+                                    <input type="text" class="form-control" id="inputBixo2" value="Guaipeca" disabled>
                                 </div>
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
