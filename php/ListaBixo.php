@@ -25,9 +25,13 @@
     
     <div class="container cadastro">
             <div class="card card-register ">
-                <div class="row card-header justify-content-between">
-                    <h5>Lista de Bixos:<h5>
-                    <a href="cadastroBixo.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>  
+                <div class="d-flex bd-highlight mb-3 card-header">
+                    <div class="mr-auto p-2 bd-highlight">
+                        <h5>Lista de Bixos:<h5>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <a href="cadastroBixo.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>   
+                    </div>
                 </div>
                 <div class="form-group">
                     <?php
@@ -44,7 +48,11 @@
                     <div class="alert alert-danger" role="alert"> 
                         Erro! Bixo morreu!
                     </div>
-                    <?php } ?>                  
+                    <?php } else if (isset($_GET['cadastro'])){ ?>
+                    <div class="alert alert-success" role="alert"> 
+                        O Bixo <?=$_GET['cadastro']?> foi Cadastrado!
+                    </div>
+                    <?php } ?>               
                         
                 </div>
                 <div class="card-body">
@@ -58,10 +66,10 @@
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                                            <a href="FuncoesBixo.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesBixo.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -76,10 +84,10 @@
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="Funcoes.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="FuncoesBixo.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesBixo.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>
@@ -94,10 +102,10 @@
                                 <div class="col-md-3">
                                     <div class=" form-row" style="padding-top: 30px;">
                                         <div class="col-md-6">
-                                        <a href="Funcoes.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
+                                        <a href="FuncoesBixo.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="Funcoes.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                            <a href="FuncoesBixo.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                         </div>
                                     </div>
                                 </div>

@@ -49,7 +49,7 @@
                     <?php } else if (isset($_GET['erro']) && ($_GET['erro']=='404')){ ?>
                     <div class="alert alert-danger" role="alert"> 
                         Erro! O item se foi!
-                        </div>
+                    </div>
                     <?php } else if (isset($_GET['cadastro'])){ ?>
                     <div class="alert alert-success" role="alert"> 
                         O Item <?=$_GET['cadastro']?> foi Cadastrado!

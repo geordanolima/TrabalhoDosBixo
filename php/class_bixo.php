@@ -1,20 +1,33 @@
 <?php
-class Pokemon
+class Bixo
 {
     private $id;
     private $nome;
+    private $descricao;
     private $vida;
     private $defesa;
     private $ataque;
     private $imagem;
+    private $latitude;
+    private $longitude;
 
-    public function __construct($nome = null, $vida = null, $defesa = null, $ataque = null, $imagem = null)
+    public function __construct($nome = null,
+                                $descricao = null, 
+                                $vida = null,                                
+                                $defesa = null, 
+                                $ataque = null, 
+                                $imagem = null,
+                                $latitude = null,
+                                $longitude = null)
     {
         if($nome != null) $this->nome = $nome;
+        if($descricao != null) $this->descrcao = $descricao;
         if($vida != null) $this->vida = $vida;
         if($defesa != null) $this->defesa = $defesa;
         if($ataque != null) $this->ataque = $ataque;
         if($imagem != null) $this->imagem = $imagem;
+        if($latitude != null) $this->latitude = $latitude;
+        if($longitude != null) $this->longitude = $longitude;
     }
 
      /**
@@ -151,7 +164,7 @@ class Pokemon
     //     return false;
     // }
 
-    public function criar()
+    public function cadastrarBixo()
     {
          //teremos futuramente um INSERT INTO TITULARES 
             //                          (nome, documento) 
@@ -163,7 +176,7 @@ class Pokemon
         return false;
     }
 
-    public function atualizar()
+    public function atualizarBixo()
     {
         //teremos futuramento um
             //UPDATE Titular SET nome = $this->nome,
@@ -175,7 +188,7 @@ class Pokemon
         return false;
     }
 
-    public function remover()
+    public function excluirBixo()
     {
         if($this->id != null){
             //teremos futuramente un
@@ -187,18 +200,77 @@ class Pokemon
         return false;
     }
 
-    public function selecionar($id = null)
+    public function ListarBixos($id = null)
     {
         //teremos futuramente um
         //SELECT * FROM Titular WHERE id = $this->id
+        return true;
     }
 
-    public function selecionarTodos()
-    {
-        //teremos futuramente
-        //SELECT * FROM titular
+    public function buscarBixo(){
+        return true;
     }
 
 
    
+
+    /**
+     * Get the value of descricao
+     */ 
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * Set the value of descricao
+     *
+     * @return  self
+     */ 
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of latitude
+     */ 
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set the value of latitude
+     *
+     * @return  self
+     */ 
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of longitude
+     */ 
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set the value of longitude
+     *
+     * @return  self
+     */ 
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
 }

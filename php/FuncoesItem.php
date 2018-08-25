@@ -66,7 +66,7 @@ function carregarFotoItem($arquivoEmProcesso, $idItem)
 function buscarItem()
 {
     if(!isset($_GET['id'])){
-        header('Location: istaItens.php?erro=404');
+        header('Location: listaItens.php?erro=404');
         exit;
     }
     $idItem = strip_tags($_GET['id']);
