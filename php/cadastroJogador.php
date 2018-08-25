@@ -26,13 +26,17 @@
         <div class="card card-register ">
             <div class="card-header">Cadastrar um Jogador:</div>
             <div class="card-body">
-                <form>
+                <form class="container" action="FuncoesJogador.php" method="post">
+                    <input type="hidden" name="op" 
+                        value="<?=(isset($_GET['id'])) ? 'atualizar' : '';?>">
+                    <input type="hidden" name="id" 
+                        value="<?=(isset($_GET['id'])) ? $_GET['id'] : '';?>">
                     <div class="form-group">
                         <div class="form-row">
                             <!-- Nome Jogador -->
                                 <label for="inputNome">Nome</label>
-                                <input type="text" class="form-control" id="inputNome" placeholder="Nome Jogador"
-                                value="<?=(isset($bagaca)) ? $bagaca['nome'] : '';?>">
+                                <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome Jogador" required
+                                    value="<?=(isset($bagaca)) ? $bagaca['nome'] : '';?>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,14 +44,13 @@
                             <div class="col-md-6">
                             <!-- apelido Jogador -->
                             <label for="inputApelido">Apelido</label>
-                            <input type="text" class="form-control" id="inputApelido" placeholder="Apelido Jogador"
+                            <input type="text" class="form-control" id="inputApelido"  name="apelido" placeholder="Apelido Jogador"
                                 value="<?=(isset($bagaca)) ? $bagaca['apelido'] : '';?>">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputGenero">Genero</label>
-                                <select id="inputGenero" class="form-control" >
-                                    <option selected='selected'> Selecione...</option>
-                                    <option <?=(isset($bagaca)) ? (($bagaca['genero'] == 'Masculino') ? "selected='selected'" : '') : '';?>> Masculino</option>
+                                <select id="inputGenero" class="form-control" required name="genero">
+                                    <option selected='selected'> Masculino</option>
                                     <option <?=(isset($bagaca)) ? (($bagaca['genero'] == 'Feminino') ? "selected='selected'" : '') : '';?>> Feminino</option>
                                     <option <?=(isset($bagaca)) ? (($bagaca['genero'] == 'Outro') ? "selected='selected'" : '') : '';?>> Outro</option>
                                 </select>
@@ -59,13 +62,13 @@
                                 <div class="col-md-6">
                                 <!-- Nome email -->
                                     <label for="inputEmail">E-mail</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email"
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" required
                                     value="<?=(isset($bagaca)) ? $bagaca['email'] : '';?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="customFileLang">Imagem de perfil</label>
                                     <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="" value="<?=(isset($bagaca)) ? $bagaca['descImg'] : '';?>">
+                                        <input type="text" class="form-control" readonly="" name="imagem" value="<?=(isset($bagaca)) ? $bagaca['descImg'] : '';?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
                                                 Buscar <input type="file" style="display: none;" multiple=""> 
@@ -79,11 +82,11 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="inputSenha">Senha</label>
-                                <input type="password" class="form-control" id="inputSenha" placeholder="Senha" value="<?=(isset($bagaca)) ? $bagaca['senha'] : '';?>">  
+                                <input type="password" class="form-control" id="inputSenha" name="senha" placeholder="Senha" required value="<?=(isset($bagaca)) ? $bagaca['senha'] : '';?>">  
                             </div>
                             <div class="col-md-6">
                                 <label for="inputConfirmaSenha">Confirme a Senha</label>
-                                <input type="password" class="form-control" id="inputConfirmaSenha" placeholder="Confirme a Senha" value="<?=(isset($bagaca)) ? $bagaca['senha'] : '';?>">
+                                <input type="password" class="form-control" id="inputConfirmaSenha" placeholder="Confirme a Senha" required value="<?=(isset($bagaca)) ? $bagaca['senha'] : '';?>">
                             </div>
                         </div>
                     </div>

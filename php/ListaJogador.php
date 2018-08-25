@@ -23,9 +23,13 @@
     
     <div class="container cadastro">
             <div class="card card-register ">
-                <div class="row card-header justify-content-between">
-                    <h5>Lista de Jogadores:<h5>
-                    <a href="cadastroJogador.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>  
+                <div class="d-flex bd-highlight mb-3 card-header">
+                    <div class="mr-auto p-2 bd-highlight">
+                        <h5>Lista de Jogadores:<h5>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                        <a href="cadastroJogador.php" class="btn btn-block btn-success" role="button" aria-pressed="true" >Cadastrar</a>  
+                    </div>
                 </div>
                 <div class="form-group">
                     <?php
@@ -36,13 +40,17 @@
                     </div>
                    <?php } else if (isset($_GET['atualizado'])){ ?>
                     <div class="alert alert-warning" role="alert"> 
-                    O Jogador <?=$_GET['atualizado']?> foi alterado!
+                        O Jogador <?=$_GET['atualizado']?> foi alterado. #Ciborgue!
                     </div>
                     <?php } else if (isset($_GET['erro']) && ($_GET['erro']=='404')){ ?>
                     <div class="alert alert-danger" role="alert"> 
                         Erro! O Jogador morreu!
                     </div>
-                    <?php } ?>                  
+                    <?php } else if (isset($_GET['cadastro'])){ ?>
+                    <div class="alert alert-success" role="alert"> 
+                        O Jogador <?=$_GET['cadastro']?> foi Cadastrado!
+                    </div>
+                    <?php } ?>              
                       
                 </div>
                 <div class="card-body">

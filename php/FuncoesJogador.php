@@ -1,15 +1,16 @@
 <?php
+require('class_jogador.php');
 
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
-
+    // die($opcao);
     switch($opcao){
         case 'excluir':
             excluirjogador();
             break;
         
         case 'editar':
-            busarjogador();
+            buscaJogador();
             break;
         
         case 'atualizar':
@@ -18,6 +19,10 @@ if (isset($_REQUEST['op'])){
                 
         case 'listar':
             listarjogador();
+            break;
+        
+        case 'cadastro':
+            cadastrarJogador();
             break;
     }   
 }
@@ -47,8 +52,9 @@ function excluirjogador()
     $idjogador = strip_tags($_GET['id']);
     $jogador = new Jogador();
     $jogador->setId($idjogador);
-    if($jogador->excluirItem()){
-        echo "Jogador de ID = " . $idjogador . ' excluido!';    
+    if($jogador->excluirJogador()){
+        header('Location: listaJogador.php?excluido=' . ($idjogador));
+    exit;  
     }else{
         echo "Jogador de ID = " . $idjogador . 'não pode ser excluido!';
     }
@@ -62,26 +68,34 @@ function buscaJogador(){
     }
 
     $idjogador = strip_tags($_GET['id']);
-    $jogador = new Jogador();
-    $jogador->setId($idjogador);
+    $jogador = new Jogador('nome','apelido','Masculino','email@email.com','jog1.png','senha');
+    $jogador->setId(1);
     if($jogador->buscaJogador()){
-        echo "Jogador de ID = " . $idjogador . ' encontrado #bora editar!';    
+        $bagaca = [
+            'id'            => 1,
+            'nome'          => $jogador->getnome(),
+            'apelido'       => $jogador->getapelido(),
+            'genero'        => $jogador->getgenero(),
+            'email'         => $jogador->getemail(),
+            'senha'         => $jogador->getsenha(),
+            'descImg'       => $jogador->geturlImagem(),
+            'img'           => '../public/imgs/' . $jogador->geturlImagem()
+        ];
+        require_once('cadastroJogador.php');
+        exit;      
     }else{
         echo "Jogador de ID = " . $idjogador . 'não encontrado #porque não quero!';
     }
-
-    $bagaca = $jogador;
-    require_once('cadastroJogador.php');
-    exit;
+    
 }
 
-function editarjogador()
-{
-    $idjogador = strip_tags($_GET['id']);
+function editarjogador(){
+    $idjogador = strip_tags($_REQUEST['id']);
     $jogador = new Jogador();
     $jogador->setId($idjogador);
-    if($jogador->editarjogador()){
-        echo "Jogador de ID = " . $idjogador . ' alterado #agora é um ciborg!';    
+    if($jogador->atualizarJogador()){
+        header('Location: listaJogador.php?atualizado=' . ($idjogador));
+        exit;
     }else{
         echo "Jogador de ID = " . $idjogador . ' sem alterações!';
     }
@@ -101,9 +115,7 @@ function atualizarjogador()
     if(!empty($_FILES['foto'])){
         $carregou = carregarFotoJogador($_FILES['foto'], $_POST['id']);
     }
-    editarjogador();
-    header('Location: listaJogador.php?atualizado=' . ($_POST['nome']));
-    exit;    
+    editarjogador();    
 }
 
 function listarjogador(){
@@ -115,11 +127,22 @@ function listarjogador(){
 }
 
 function cadastrarJogador(){
+    if (!empty($_POST['nome'])){
+        if ($_POST['genero'] === 'Masculino'){
+            $sex = 'Masculino';
+        } else  if ($_POST['genero'] === 'Feminino'){
+            $sex = 'Feminino';
+        } else {
+            $sex = 'Outro';
+        }
 
-    $jogador = new Jogador();
-    if($jogador->cadastrarJogador()){
-        echo "Jogador de ID = " . $idjogador . ' alterado #agora é um ciborg!';    
-    }else{
-        echo "Jogador de ID = " . $idjogador . ' sem alterações!';
-    }    
+        $jogador = new Jogador($_POST['nome'],$_POST['apelido'],$sex,$_POST['email'],$_POST['imagem'],$_POST['senha']);
+
+        if($jogador->cadastrarJogador()){
+            header('Location: listaJogador.php?cadastro=' . $_POST['nome']);
+            exit;
+        }else{
+            echo "Jogador de nome = " . $_POST['nome'] . ' Não cadastrado! #DeuTreta';
+        }    
+    }
 }
