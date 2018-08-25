@@ -27,6 +27,7 @@ function montamenu(){
     } 
     echo ('<a href="ListaBixo.php">Lista de bixo</a>' .
         '<a href="ListaJogador.php">Lista de Jogadores</a>' .
+        '<a href="ListaItem.php">Lista de Itens</a>' .
         '<a href="mapa.php">Mapa</a>' .
         '<img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">' .
         '<label class="logo">Joguinho dos bixo</label>' .
