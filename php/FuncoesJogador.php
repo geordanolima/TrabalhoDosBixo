@@ -107,7 +107,19 @@ function atualizarjogador()
 }
 
 function listarjogador(){
-    
+    $vetor = array();
+    array_push($vetor, listaJogador());
+
     header('Location: listaJogador.php');
     exit;
+}
+
+function cadastrarJogador(){
+
+    $jogador = new Jogador();
+    if($jogador->cadastrarJogador()){
+        echo "Jogador de ID = " . $idjogador . ' alterado #agora é um ciborg!';    
+    }else{
+        echo "Jogador de ID = " . $idjogador . ' sem alterações!';
+    }    
 }
