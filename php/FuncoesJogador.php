@@ -54,7 +54,7 @@ function excluirjogador()
     $jogador->setId($idjogador);
     if($jogador->excluirJogador()){
         header('Location: listaJogador.php?excluido=' . ($idjogador));
-    exit;  
+        exit;  
     }else{
         echo "Jogador de ID = " . $idjogador . 'não pode ser excluido!';
     }
@@ -69,10 +69,10 @@ function buscaJogador(){
 
     $idjogador = strip_tags($_GET['id']);
     $jogador = new Jogador('nome','apelido','Masculino','email@email.com','jog1.png','senha');
-    $jogador->setId(1);
+    $jogador->setId($idjogador);
     if($jogador->buscaJogador()){
         $bagaca = [
-            'id'            => 1,
+            'id'            => $jogador->getid(),
             'nome'          => $jogador->getnome(),
             'apelido'       => $jogador->getapelido(),
             'genero'        => $jogador->getgenero(),

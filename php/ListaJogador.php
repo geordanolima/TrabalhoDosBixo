@@ -54,8 +54,7 @@
                       
                 </div>
                 <div class="card-body">
-                    <form>
-                        
+                    <form>                        
                         <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 1)){ ?> style="visibility: hidden"<?php } ?>>
                             <div class="form-row" >
                                 <div class="col-md-9">

@@ -25,9 +25,9 @@ function montamenu(){
     if(isset($_SESSION['nome'])) {
         echo ('<a id="buena" href="#"> Buenas ' . $_SESSION['nome'] . '!</a>');
     } 
-    echo ('<a href="ListaBixo.php">Lista de bixo</a>' .
-        '<a href="ListaJogador.php">Lista de Jogadores</a>' .
-        '<a href="ListaItem.php">Lista de Itens</a>' .
+    echo ('<a href="ListaBixo.php">bixos</a>' .
+        '<a href="ListaJogador.php">Jogadores</a>' .
+        '<a href="ListaItem.php">Itens</a>' .
         '<a href="mapa.php">Mapa</a>' .
         '<img src="../img/dog-w.png" style="width:100px;margin-top: 50%;margin-left: 30px;">' .
         '<label class="logo">Joguinho dos bixo</label>' .

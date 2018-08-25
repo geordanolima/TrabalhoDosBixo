@@ -19,12 +19,6 @@ class Jogador
         if($senha != null) $this->senha = $senha;
     }
 
-
-    
-    
-
-
-
     //refatoracao com o projeto em andamento com o
     //intuito de diminuir impacto da manutencao,
     //na ideia de gerar menos bugs em manutencoes
@@ -38,8 +32,7 @@ class Jogador
     //     return false;
     // }
 
-    public function cadastrarJogador()
-    {
+    public function cadastrarJogador(){
          //teremos futuramente um INSERT INTO TITULARES
             //                          (nome, documento)
             //                      VALUES
@@ -50,19 +43,16 @@ class Jogador
         return false;
     }
 
-   public function excluirJogador()
-   {
+   public function excluirJogador(){
         //fazer delete from item where id=$this->id
         return true;
    }
 
-   public function listarJogador()
-   {
+   public function listarJogador(){
         return true;
    }
 
-   public function atualizarJogador()
-   {
+   public function atualizarJogador(){
         return true;   
    }
 

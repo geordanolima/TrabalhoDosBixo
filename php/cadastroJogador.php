@@ -28,7 +28,7 @@
             <div class="card-body">
                 <form class="container" action="FuncoesJogador.php" method="post">
                     <input type="hidden" name="op" 
-                        value="<?=(isset($_GET['id'])) ? 'atualizar' : '';?>">
+                        value="<?=(isset($_GET['id'])) ? 'atualizar' : 'cadastro';?>">
                     <input type="hidden" name="id" 
                         value="<?=(isset($_GET['id'])) ? $_GET['id'] : '';?>">
                     <div class="form-group">

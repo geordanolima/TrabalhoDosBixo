@@ -25,19 +25,24 @@
             <div class="card card-register ">
                 <div class="card-header">Cadastrar um Item:</div>
                 <div class="card-body">
-                    <form>
+                    <form class="container" action="FuncoesItem.php" method="post">
+                    <input type="hidden" name="op" 
+                        value="<?=(isset($_GET['id'])) ? 'atualizar' : 'cadastro';?>">
+                    <input type="hidden" name="id" 
+                        value="<?=(isset($_GET['id'])) ? $_GET['id'] : '';?>">
+
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-6">
-                                <!-- Nome Item -->
                                     <label for="inputItem">Nome</label>
-                                    <input type="text" class="form-control" id="inputItem" placeholder="Nome Item">
+                                    <input type="text" class="form-control" id="inputItem" name="nome" placeholder="Nome Item" required
+                                        value="<?=(isset($Item)) ? $Item['nome'] : '';?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputGenero">Bônus</label>
-                                    <select id="inputGenero" class="form-control">
-                                        <option selected>Selecione o Bônus</option>
-                                        <option>Água</option>
+                                    <select id="inputGenero" name="genero" class="form-control" required 
+                                        value="<?=(isset($Item)) ? $Item['genero'] : '';?>">
+                                        <option selected>Água</option>
                                         <option>Fogo</option>
                                         <option>Terra</option>
                                     </select>
@@ -48,12 +53,14 @@
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="inputValor">Valor Item</label>
-                                    <input type="number" class="form-control" name="ValorItem" min="0" max="100" step="10" placeholder="0"> 
+                                    <input type="number" class="form-control" name="ValorItem" min="0" max="100" step="10" placeholder="0" required 
+                                        value="<?=(isset($Item)) ? $Item['ValorItem'] : '';?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="customFileLang">Imagem Item</label>
                                     <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="">
+                                        <input type="text" class="form-control" name="imagem" readonly=""
+                                            value="<?=(isset($Item)) ? $Item['imagem'] : '';?>">
                                         <label style="height: 10px;">
                                             <span class="btn btn-primary input-group-btn">
                                                 Buscar <input type="file" style="display: none;" multiple=""> 
@@ -63,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary btn-block">Cadastrar / Atualizar</button>
                     </form>
                 </div>
             </div>

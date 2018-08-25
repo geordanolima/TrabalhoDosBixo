@@ -1,4 +1,5 @@
 <?php
+require('class_item.php');
 
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
@@ -9,7 +10,7 @@ if (isset($_REQUEST['op'])){
             break;
         
         case 'editar':
-            busarItem();
+            buscarItem();
             break;
         
         case 'atualizar':
@@ -19,109 +20,115 @@ if (isset($_REQUEST['op'])){
         case 'listar':
             listarItem();
             break;
+        
+        case 'cadastro':
+            cadastrarItem();
+            break;
     }   
+}
+
+
+function carregarFotoItem($arquivoEmProcesso, $idItem)
+{
+    
+    $mimesValidos = [
+        'image/png',
+        'image/jpg',
+        'image/jpeg'
+    ];
+    $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
+    if($validacao){
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/Item'.$idItem.'.png');   
+    }
+    return $validacao;
 }
 
  function excluirItem()
 {
-
     if(!isset($_GET['id'])){
-        header('Location: index.html?erro=1');
+        header('Location: istaItens.html?erro=404');
         exit;
     }
     $idItem = strip_tags($_GET['id']);
     $item = new Item();
     $item->setId($idItem);
     if($item->excluirItem()){
-        echo "Item de ID = " . $idItem . ' excluido!';    
+        header('Location: listaItem.php?excluido=' . ($idItem));
+        exit; 
     }else{
         echo "Item de ID = " . $idItem . 'não pode ser excluido!';
     }
     //pesquiso no banco de dados o registro ID = 1
     //achado registro, executar comando DELETE ID = 1
     //em caso de sucesso verificar retorno para true, senao false
-    
-
 }
 
-function editarPokemon()
+function buscarItem()
 {
     if(!isset($_GET['id'])){
-        header('Location: index.html?erro=1');
+        header('Location: istaItens.php?erro=404');
         exit;
     }
-    if(isset($_GET['error'])){
-        if($_GET['error'] == 3){
-            //redirecionar para uma pagina de erros
-            //ou retornar com mensagem explicativa do erro para
-            //a mesma pagina de edicao do cadastro
-        }
-    }
-   
-
-
-    //procurar no banco, pegar dados do cliente
-    $dadosPokemon = [
-    	1 =>[
-        'id'        => 1,
-        'nome'      => 'Charizard',
-        'vida'  => '100',
-        'ataque'  => '80',
-        'defesa'  => '65',
-        'latitude'  => '100',
-        'longetude'  => '100'],
-        2=>[
-        	 'id'        => 2,
-        'nome'      => 'Blostaise',
-        'vida'  => '100',
-        'ataque'  => '85',
-        'defesa'  => '70',
-        'latitude'  => '100',
-        'longetude'  => '100'],
-        3=>[
-        	 'id'        => 3,
-        'nome'      => 'Pikachu',
-        'vida'  => '100',
-        'ataque'  => '100',
-        'defesa'  => '100',
-        'latitude'  => '100',
-        'longetude'  => '100']
-    ];
-    require_once('edit-pokemon.php');
-    exit;
-
-    
     $idItem = strip_tags($_GET['id']);
+    $item = new Item('nome','10','bonus','Item1.png');
+    $item->setId($idItem);
+
+    if($item->buscarItem()){
+        $Item = [
+            'id'            => $item->getid(),
+            'nome'          => $item->getnome(),
+            'genero'        => $item->getbonus(),
+            'ValorItem'     => $item->getvalor(),
+            'imagem'        => $item->getImagem()
+        ];
+        require_once('cadastroItem.php');
+        exit;      
+    } else {
+        echo "Item de ID = " . $item . 'não encontrado';
+    }
+}
+
+
+function editarItem(){
+    
+    $idItem = strip_tags($_REQUEST['id']);
     $item = new Item();
     $item->setId($idItem);
     if($item->atualizarItem()){
-        echo "Item de ID = " . $idItem . ' excluido!';    
+        header('Location: listaitem.php?atualizado=' . ($idItem));
+        exit;
     }else{
-        echo "Item de ID = " . $idItem . 'não pode ser excluido!';
+        echo "Item de ID = " . $idItem . ' sem alterações!';
     }
+    
+    require_once('listaItem.php');
+    exit;
 
 }
 
-function atualizarPokemon()
+
+function atualizarItem()
 {
-    if(empty($_POST['nome']) || empty($_POST['vida'])){
-        header('Location: manager.php?opcao=editar&id='.$_POST['id']);
+    if(empty($_POST['nome'])){
+        header('Location: cadastroItem.php');
         exit;
     }
+    $carregou = carregarFotoItem($_FILES['foto'], $_POST['nome']);
+    if(!$carregou){
+        echo 'Algum erro aconteceu'. $_FILES['foto']['error'];
+    }
+    editaritem();
+}
 
-    //procura no banco onde o ID for igual ao repassado
-    //via hidden e modifica os dados de acordo com o que vier
-    //do form e em seguida envia UPDATE pro banco
-    // echo '<pre>';
-    // print_r($_FILES);
-    // echo '</pre>';
-        $carregou = carregarFotoPokemon($_FILES['foto'], $_POST['nome']);
-        if($carregou){
-            header('Location: listagem.php?error=4');
+function cadastrarItem(){
+    if (!empty($_POST['nome'])){
+        $item = new Item($_POST['nome'],$_POST['ValorItem'],$_POST['bonus'],$_POST['imagem']);
+
+        if($item->cadastrarItem()){
+            header('Location: listaItem.php?cadastro=' . $_POST['nome']);
             exit;
         }else{
-            echo 'Algum erro aconteceu'. $_FILES['foto']['error'];
-        }
-    
-    
+            echo "Item de nome = " . $_POST['nome'] . ' Não cadastrado! #DeuTreta';
+        }    
+    }
 }
