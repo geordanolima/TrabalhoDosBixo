@@ -41,13 +41,20 @@ function excluirjogador()
 {
 
     if(!isset($_GET['id'])){
-        header('Location: ListaJogador.php?erro=1');
+        header('Location: ListaJogador.html?erro=1');
         exit;
     }
-    $idbixo = strip_tags($_GET['id']);
-    
-    header('Location: listaJogador.php?excluido=' . $idbixo);
-    exit;
+    $idjogador = strip_tags($_GET['id']);
+    $jogador = new Jogador();
+    $jogador->setId($idjogador);
+    if($jogador->excluirItem()){
+        echo "Item de ID = " . $idjogador . ' excluido!';    
+    }else{
+        echo "Item de ID = " . $idjogador . 'não pode ser excluido!';
+    }
+    //pesquiso no banco de dados o registro ID = 1
+    //achado registro, executar comando DELETE ID = 1
+    //em caso de sucesso verificar retorno para true, senao false
 }
 
 function editarjogador()
@@ -65,33 +72,35 @@ function editarjogador()
                 'id'            => 1,
                 'nome'          => 'Zezao',
                 'apelido'       => 'Zezinho',
-                'genero'        => 'machao',
+                'genero'        => 'Masculino',
                 'email'         => 'zezao@gmail.com',
-                'descImg'       => 'jogador' . $idjogador . '.png',
-                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
+                'senha'         => 'senha1',
+                'descImg'       => 'jog' . $idjogador . '.png',
+                'img'           => '../public/imgs/jog' . $idjogador . '.png'
             ],
             2=>[
                 'id'            => 2,
                 'nome'          => 'Fordencia',
                 'apelido'       => 'Fordencinha',
                 'genero'        => 'machona',
-                'email'        => 'fordencinha@gmail.com',
-                'descImg'       => 'jogador' . $idjogador . '.png',
-                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
+                'email'         => 'fordencinha@gmail.com',
+                'senha'         => 'senha2',
+                'descImg'       => 'jog' . $idjogador . '.png',
+                'img'           => '../public/imgs/jog' . $idjogador . '.png'
             ],
             3=>[
                 'id'            => 3,
                 'nome'          => 'Jao',
                 'apelido'       => 'Jaozaço',
                 'genero'        => 'Indefinido',
-                'email'        => 'jaozinho@gmail.com',
-                'descImg'       => 'jogador' . $idjogador . '.png',
-                'img'           => '../public/imgs/bixo' . $idjogador . '.png'
+                'senha'         => 'senha3',
+                'email'         => 'jaozinho@gmail.com',
+                'descImg'       => 'jog' . $idjogador . '.png',
+                'img'           => '../public/imgs/jog' . $idjogador . '.png'
             ]
         ];
-    
+    $bagaca = $dadosjogador[$idjogador];
     require_once('cadastroJogador.php');
-    header('Location: cadastroJogador.php');
     exit;
 
 }
