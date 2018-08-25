@@ -38,7 +38,7 @@ class Jogador
     //     return false;
     // }
 
-    public function cadastrar()
+    public function cadastrarJogador()
     {
          //teremos futuramente um INSERT INTO TITULARES
             //                          (nome, documento)
@@ -50,20 +50,24 @@ class Jogador
         return false;
     }
 
-   public function excluirItem()
+   public function excluirJogador()
    {
         //fazer delete from item where id=$this->id
         return true;
    }
 
-   public function listar()
+   public function listarJogador()
    {
         return true;
    }
 
-   public function atualizarItem()
+   public function atualizarJogador()
    {
         return true;   
+   }
+
+   public function buscaJogador(){
+       return true;
    }
 
    

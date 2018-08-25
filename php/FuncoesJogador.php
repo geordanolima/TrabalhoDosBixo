@@ -9,7 +9,7 @@ if (isset($_REQUEST['op'])){
             break;
         
         case 'editar':
-            editarjogador();
+            busarjogador();
             break;
         
         case 'atualizar':
@@ -32,7 +32,7 @@ function carregarFotoJogador($arquivoEmProcesso, $idjogador)
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idjogador.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/Jog'.$idjogador.'.png');   
     }
     return $validacao;
 }
@@ -48,59 +48,45 @@ function excluirjogador()
     $jogador = new Jogador();
     $jogador->setId($idjogador);
     if($jogador->excluirItem()){
-        echo "Item de ID = " . $idjogador . ' excluido!';    
+        echo "Jogador de ID = " . $idjogador . ' excluido!';    
     }else{
-        echo "Item de ID = " . $idjogador . 'não pode ser excluido!';
+        echo "Jogador de ID = " . $idjogador . 'não pode ser excluido!';
     }
-    //pesquiso no banco de dados o registro ID = 1
-    //achado registro, executar comando DELETE ID = 1
-    //em caso de sucesso verificar retorno para true, senao false
+
 }
 
-function editarjogador()
-{
+function buscaJogador(){
     if(!isset($_GET['id'])){
         header('Location: listaJogador.php?erro=404');
         exit;
     }
-    
-    $idjogador = strip_tags($_GET['id']);
 
-    $dadosjogador = 
-        [
-            1=>[
-                'id'            => 1,
-                'nome'          => 'Zezao',
-                'apelido'       => 'Zezinho',
-                'genero'        => 'Masculino',
-                'email'         => 'zezao@gmail.com',
-                'senha'         => 'senha1',
-                'descImg'       => 'jog' . $idjogador . '.png',
-                'img'           => '../public/imgs/jog' . $idjogador . '.png'
-            ],
-            2=>[
-                'id'            => 2,
-                'nome'          => 'Fordencia',
-                'apelido'       => 'Fordencinha',
-                'genero'        => 'machona',
-                'email'         => 'fordencinha@gmail.com',
-                'senha'         => 'senha2',
-                'descImg'       => 'jog' . $idjogador . '.png',
-                'img'           => '../public/imgs/jog' . $idjogador . '.png'
-            ],
-            3=>[
-                'id'            => 3,
-                'nome'          => 'Jao',
-                'apelido'       => 'Jaozaço',
-                'genero'        => 'Indefinido',
-                'senha'         => 'senha3',
-                'email'         => 'jaozinho@gmail.com',
-                'descImg'       => 'jog' . $idjogador . '.png',
-                'img'           => '../public/imgs/jog' . $idjogador . '.png'
-            ]
-        ];
-    $bagaca = $dadosjogador[$idjogador];
+    $idjogador = strip_tags($_GET['id']);
+    $jogador = new Jogador();
+    $jogador->setId($idjogador);
+    if($jogador->buscaJogador()){
+        echo "Jogador de ID = " . $idjogador . ' encontrado #bora editar!';    
+    }else{
+        echo "Jogador de ID = " . $idjogador . 'não encontrado #porque não quero!';
+    }
+
+    $bagaca = $jogador;
     require_once('cadastroJogador.php');
+    exit;
+}
+
+function editarjogador()
+{
+    $idjogador = strip_tags($_GET['id']);
+    $jogador = new Jogador();
+    $jogador->setId($idjogador);
+    if($jogador->editarjogador()){
+        echo "Jogador de ID = " . $idjogador . ' alterado #agora é um ciborg!';    
+    }else{
+        echo "Jogador de ID = " . $idjogador . ' sem alterações!';
+    }
+    
+    require_once('listaJogador.php');
     exit;
 
 }
@@ -115,12 +101,13 @@ function atualizarjogador()
     if(!empty($_FILES['foto'])){
         $carregou = carregarFotoJogador($_FILES['foto'], $_POST['id']);
     }
+    editarjogador();
     header('Location: listaJogador.php?atualizado=' . ($_POST['nome']));
     exit;    
 }
 
 function listarjogador(){
     
-    header('Location: listaBixo.php');
+    header('Location: listaJogador.php');
     exit;
 }
