@@ -57,47 +57,14 @@ function editarPokemon()
             //a mesma pagina de edicao do cadastro
         }
     }
-   
-
-
-    //procurar no banco, pegar dados do cliente
-    $dadosPokemon = [
-    	1 =>[
-        'id'        => 1,
-        'nome'      => 'Charizard',
-        'vida'  => '100',
-        'ataque'  => '80',
-        'defesa'  => '65',
-        'latitude'  => '100',
-        'longetude'  => '100'],
-        2=>[
-        	 'id'        => 2,
-        'nome'      => 'Blostaise',
-        'vida'  => '100',
-        'ataque'  => '85',
-        'defesa'  => '70',
-        'latitude'  => '100',
-        'longetude'  => '100'],
-        3=>[
-        	 'id'        => 3,
-        'nome'      => 'Pikachu',
-        'vida'  => '100',
-        'ataque'  => '100',
-        'defesa'  => '100',
-        'latitude'  => '100',
-        'longetude'  => '100']
-    ];
-    require_once('edit-pokemon.php');
-    exit;
-
-    
+      
     $idPokemon = strip_tags($_GET['id']);
     $pokemon = new Pokemon();
     $pokemon->setId($idPokemon);
     if($pokemon->atualizarPokemon()){
-        echo "Pokemon de ID = " . $idPokemon . ' excluido!';    
+        echo "Pokemon de ID = " . $idPokemon . ' encontrado!';    
     }else{
-        echo "Pokemon de ID = " . $idPokemon . 'não pode ser excluido!';
+        echo "Pokemon de ID = " . $idPokemon . ' nao encontrado!';
     }
 
 }
@@ -123,5 +90,13 @@ function atualizarPokemon()
             echo 'Algum erro aconteceu'. $_FILES['foto']['error'];
         }
     
+        $idPokemon = strip_tags($_GET['id']);
+        $pokemon = new Pokemon();
+        $pokemon->setId($idPokemon);
+        if($pokemon->atualizarPokemon()){
+            echo "Pokemon de ID = " . $idPokemon . ' alterado agora é um cachorro!';    
+        }else{
+            echo "Pokemon de ID = " . $idPokemon . ' nãõ foi alterado!';
+        }
     
 }
