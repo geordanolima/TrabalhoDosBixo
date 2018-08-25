@@ -107,7 +107,9 @@ function atualizarjogador()
 }
 
 function listarjogador(){
-    
+    $vetor = array();
+    array_push($vetor, listaJogador());
+
     header('Location: listaJogador.php');
     exit;
 }
