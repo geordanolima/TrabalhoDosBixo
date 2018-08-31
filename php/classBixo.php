@@ -1,4 +1,5 @@
 <?php
+require_once('Conexao.php');
 class Bixo
 {
     private $id;
@@ -166,49 +167,94 @@ class Bixo
 
     public function cadastrarBixo()
     {
-         //teremos futuramente um INSERT INTO TITULARES 
-            //                          (nome, documento) 
-            //                      VALUES 
-            //                  ($this->nome, $this->documento )
-        //executo a query
-        $retornoQuery = 1; //insert executado com sucesso
-        if($retornoQuery) return true;
-        return false;
+        $sql = 'INSERT INTO bixos (nome, 
+                                   descricao, 
+                                   vida, 
+                                   ataque, 
+                                   defesa, 
+                                   lati, 
+                                   long, 
+                                   img) 
+                           VALUES (:nome, 
+                                   :descricao, 
+                                   :vida, 
+                                   :ataque, 
+                                   :defesa, 
+                                   :lati, 
+                                   :long, 
+                                   :img)';
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $consulta->bindValue(':descricao', $this->descricao, PDO::PARAM_STR);
+        $consulta->bindValue(':vida', $this->vida, PDO::PARAM_INT);
+        $consulta->bindValue(':ataque', $this->ataque, PDO::PARAM_INT);
+        $consulta->bindValue(':defesa', $this->defesa, PDO::PARAM_INT);
+        $consulta->bindValue(':lati', $this->lati, PDO::PARAM_STR);
+        $consulta->bindValue(':long', $this->long, PDO::PARAM_STR);
+        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+
+        return  $consulta->execute();
     }
 
     public function atualizarBixo()
     {
-        //teremos futuramento um
-            //UPDATE Titular SET nome = $this->nome,
-            //                  documento = $this->getDocumento 
-            //WHERE id = $this->id 
-        //executo a query
-        $retornoQuery = 1; //update executado com sucesso
-        if($retornoQuery) return true;
-        return false;
+        if ($this->id != null) {
+            $sql = 'UPDATE bixos SET (nome = :nome,
+                                    descricao = :descricao, 
+                                    vida = :vida, 
+                                    ataque = :ataque, 
+                                    defesa = :defesa, 
+                                    lati = :lati, 
+                                    long = :long, 
+                                    img = :img)
+                    WHERE id = :id;';
+            $conexao = $this->database->getConexao();
+            $consulta = $conexao->prepare($sql);
+            $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+            $consulta->bindValue(':descricao', $this->descricao, PDO::PARAM_STR);
+            $consulta->bindValue(':vida', $this->vida, PDO::PARAM_INT);
+            $consulta->bindValue(':ataque', $this->ataque, PDO::PARAM_INT);
+            $consulta->bindValue(':defesa', $this->defesa, PDO::PARAM_INT);
+            $consulta->bindValue(':lati', $this->lati, PDO::PARAM_STR);
+            $consulta->bindValue(':long', $this->long, PDO::PARAM_STR);
+            $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+            $consulta->bindValue(':id', $this->img, PDO::PARAM_INT);                    
+            return  $consulta->execute();
+        } else {
+            return false;
+        }
     }
 
     public function excluirBixo()
     {
         if($this->id != null){
-            //teremos futuramente un
-            //DELETE FROM TITULAR WHERE id = $this->id;
-            //executar a query e tratar o retorno
-            $retornoQuery = 1;
-            if($retornoQuery) return true;
+            $conexao = $this->database->getConexao();
+            $retornoQuery = $conexao->exec('DELETE FROM bixos 
+                                            WHERE id =' . $this->id);
+            return retornoQuery;
         }
         return false;
     }
 
     public function ListarBixos($id = null)
     {
-        //teremos futuramente um
-        //SELECT * FROM Titular WHERE id = $this->id
-        return true;
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare('SELECT * FROM bixos');
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'bixos');
     }
 
     public function buscarBixo(){
-        return true;
+        $sql = 'SELECT * FROM bixos WHERE id = :id';
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $retornoQuery = $consulta->execute();
+
+        if(!$retornoQuery) return false;
+        $registro = $consulta->fetchObject('bixos');
+        return $registro;
     }
 
 
