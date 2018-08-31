@@ -1,5 +1,5 @@
 <?php
-require('class_item.php');
+require('classItem.php');
 
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);

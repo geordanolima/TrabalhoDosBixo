@@ -1,6 +1,6 @@
 <?php
 
-require_once('class_bixo.php');
+require_once('classBixo.php');
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
     switch($opcao){
