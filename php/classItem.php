@@ -133,27 +133,55 @@ class Item
     // }
 
     public function cadastrarItem(){
-         //teremos futuramente um INSERT INTO TITULARES
-            //                          (nome, documento)
-            //                      VALUES
-            //                  ($this->nome, $this->documento )
-        //executo a query
-        $retornoQuery = 1; //insert executado com sucesso
-        if($retornoQuery) return true;
-        return false;
+        $sql = 'INSERT INTO itens (nome, bonus, valor, img) 
+        VALUES (:nome, :bonus, :valor, :img)';
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $consulta->bindValue(':bonus', $this->bonus, PDO::PARAM_INT);
+        $consulta->bindValue(':valor', $this->valor, PDO::PARAM_INT);
+        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+        
+        return $consulta->execute();
+       
     }
 
    public function excluirItem(){
-        //fazer delete from item where id=$this->id
-        return true;
+    if($this->id != null){
+        $conexao = $this->database->getConexao();
+        $retornoQuery = $conexao->exec('DELETE FROM itens 
+                                        WHERE id =' . $this->id);
+        if($retornoQuery) return true;
+    }
+    return false;
    }
 
    public function listarItens(){
-        return true;
+    $sql = 'SELECT * FROM itens WHERE id = :id';
+    $conexao = $this->database->getConexao();
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+    $retornoQuery = $consulta->execute();
+    if(!$retornoQuery) return false;
+    $registro = $consulta->fetchObject('classItem');
+    return $registro;
    }
 
    public function atualizarItem(){
-       return true;
+    if($this->id != null){
+        $sql = 'UPDATE itens SET nome = :nome, 
+        WHERE id = :id';
+        $conexao = $this->database->getConexao();
+        $update = $conexao->prepare($sql);
+        $update->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $consulta->bindValue(':bonus', $this->bonus, PDO::PARAM_INT);
+        $consulta->bindValue(':valor', $this->valor, PDO::PARAM_INT);
+        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+        $retornoQuery = $update->execute();
+        //update executado com sucesso:
+        if($retornoQuery) return true;
+    }
+    return false;
    }
    public function buscarItem(){
        return  true;
