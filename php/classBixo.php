@@ -8,27 +8,29 @@ class Bixo
     private $vida;
     private $defesa;
     private $ataque;
-    private $imagem;
-    private $latitude;
-    private $longitude;
+    private $img;
+    private $lati;
+    private $long;
 
     public function __construct($nome = null,
                                 $descricao = null, 
                                 $vida = null,                                
                                 $defesa = null, 
                                 $ataque = null, 
-                                $imagem = null,
-                                $latitude = null,
-                                $longitude = null)
+                                $img = null,
+                                $lati = null,
+                                $long = null)
     {
         if($nome != null) $this->nome = $nome;
         if($descricao != null) $this->descrcao = $descricao;
         if($vida != null) $this->vida = $vida;
         if($defesa != null) $this->defesa = $defesa;
         if($ataque != null) $this->ataque = $ataque;
-        if($imagem != null) $this->imagem = $imagem;
-        if($latitude != null) $this->latitude = $latitude;
-        if($longitude != null) $this->longitude = $longitude;
+        if($img != null) $this->img = $img;
+        if($lati != null) $this->lati = $lati;
+        if($long != null) $this->long = $long;
+
+        $this->database = Conexao::getInstancia();
     }
 
      /**
@@ -132,21 +134,21 @@ class Bixo
     }
 
     /**
-     * Get the value of imagem
+     * Get the value of img
      */ 
-    public function getImagem()
+    public function getimg()
     {
-        return $this->imagem;
+        return $this->img;
     }
 
     /**
-     * Set the value of imagem
+     * Set the value of img
      *
      * @return  self
      */ 
-    public function setImagem($imagem)
+    public function setimg($img)
     {
-        $this->imagem = $imagem;
+        $this->img = $img;
 
         return $this;
     }
@@ -219,7 +221,7 @@ class Bixo
             $consulta->bindValue(':lati', $this->lati, PDO::PARAM_STR);
             $consulta->bindValue(':long', $this->long, PDO::PARAM_STR);
             $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-            $consulta->bindValue(':id', $this->img, PDO::PARAM_INT);                    
+            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);                    
             return  $consulta->execute();
         } else {
             return false;
@@ -232,17 +234,18 @@ class Bixo
             $conexao = $this->database->getConexao();
             $retornoQuery = $conexao->exec('DELETE FROM bixos 
                                             WHERE id =' . $this->id);
-            return retornoQuery;
+            return $retornoQuery;
         }
         return false;
     }
 
-    public function ListarBixos($id = null)
+    public function ListarBixos()
     {
         $conexao = $this->database->getConexao();
         $consulta = $conexao->prepare('SELECT * FROM bixos');
         $consulta->execute();
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'bixos');
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Bixo');
+        
     }
 
     public function buscarBixo(){
@@ -253,7 +256,7 @@ class Bixo
         $retornoQuery = $consulta->execute();
 
         if(!$retornoQuery) return false;
-        $registro = $consulta->fetchObject('bixos');
+        $registro = $consulta->fetchObject('Bixo');
         return $registro;
     }
 
@@ -281,41 +284,41 @@ class Bixo
     }
 
     /**
-     * Get the value of latitude
+     * Get the value of lati
      */ 
-    public function getLatitude()
+    public function getlati()
     {
-        return $this->latitude;
+        return $this->lati;
     }
 
     /**
-     * Set the value of latitude
+     * Set the value of lati
      *
      * @return  self
      */ 
-    public function setLatitude($latitude)
+    public function setlati($lati)
     {
-        $this->latitude = $latitude;
+        $this->lati = $lati;
 
         return $this;
     }
 
     /**
-     * Get the value of longitude
+     * Get the value of long
      */ 
-    public function getLongitude()
+    public function getlong()
     {
-        return $this->longitude;
+        return $this->long;
     }
 
     /**
-     * Set the value of longitude
+     * Set the value of long
      *
      * @return  self
      */ 
-    public function setLongitude($longitude)
+    public function setlong($long)
     {
-        $this->longitude = $longitude;
+        $this->long = $long;
 
         return $this;
     }

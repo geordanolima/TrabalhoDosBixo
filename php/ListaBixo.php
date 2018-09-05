@@ -57,60 +57,30 @@
                 </div>
                 <div class="card-body">
                     <form>
-                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 1)){ ?> style="visibility: hidden"<?php } ?>>
-                            <div class="form-row" >
-                                <div class="col-md-9">
-                                    <label for="inputBixo1">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo1"  value="Cusco" disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class=" form-row" style="padding-top: 30px;">
-                                        <div class="col-md-6">
-                                            <a href="FuncoesBixo.php?op=editar&id=1" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                        <?php
+                            foreach ($vetor as $registro) {
+                                // if(!(isset($_GET['excluido']) && ($_GET['excluido'] == $registro->getId()))){
+                                    ?>
+                                    <div class="form-group">
+                                        <div class="form-row" >
+                                            <div class="col-md-9">
+                                                <label for="inputBixo1">Nome</label>
+                                                <input type="text" class="form-control" id="inputBixo1"  value="<?=$registro->getNome()?>" disabled>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class=" form-row" style="padding-top: 30px;">
+                                                    <div class="col-md-6">
+                                                        <a href="FuncoesBixo.php?op=editar&id=<?=$registro->getId()?>" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="FuncoesBixo.php?op=excluir&id=<?=$registro->getId()?>" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <a href="FuncoesBixo.php?op=excluir&id=1" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 2)){ ?> style="visibility: hidden"<?php } ?>>
-                            <div class="form-row">
-                                <div class="col-md-9">
-                                    <label for="inputBixo2">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo2" value="Guaipeca" disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class=" form-row" style="padding-top: 30px;">
-                                        <div class="col-md-6">
-                                        <a href="FuncoesBixo.php?op=editar&id=2" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="FuncoesBixo.php?op=excluir&id=2" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="form-group" <?php if(isset($_GET['excluido']) && ($_GET['excluido'] == 3)){ ?> style="visibility: hidden"<?php } ?>>
-                            <div class="form-row">
-                                <div class="col-md-9">
-                                    <label for="inputBixo3">Nome</label>
-                                    <input type="text" class="form-control" id="inputBixo3" value="Tomba" disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class=" form-row" style="padding-top: 30px;">
-                                        <div class="col-md-6">
-                                        <a href="FuncoesBixo.php?op=editar&id=3" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="FuncoesBixo.php?op=excluir&id=3" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                     
+                                    </div> 
+                            <?php 
+                                } ?>
                     </form>
                 </div>
             </div>

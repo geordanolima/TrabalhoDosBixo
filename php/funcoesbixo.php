@@ -141,3 +141,12 @@ function cadastrarBixo(){
         }    
     }
 }
+
+function listarBixo(){
+    $vetor = array();
+    $bixo = new Bixo();
+    $vetor = $bixo->ListarBixos();
+    require_once('listabixo.php');
+    exit;
+}
+
