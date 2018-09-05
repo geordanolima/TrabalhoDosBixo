@@ -36,6 +36,7 @@ function carregarFotoBixo($arquivoEmProcesso, $idbixo)
         'image/jpeg'
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
+    
     if($validacao){
         $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/bixo'.$idbixo.'.png');   
     }
@@ -100,8 +101,20 @@ function editarBixo(){
     $idBixo = strip_tags($_REQUEST['id']);
     $bixo = new Bixo();
     $bixo->setId($idBixo);
-    if($bixo->atualizarBixo()){
-        header('Location: listaBixo.php?atualizado=' . ($idBixo));
+    $bixo->setNome($_POST['nome']);
+    $bixo->setDescricao($_POST['descricao']);
+    $bixo->setVida($_POST['vida']);
+    $bixo->setAtaque($_POST['ataque']);
+    $bixo->setDefesa($_POST['defesa']);
+    $bixo->setLati($_POST['latitude']);
+    $bixo->setLong($_POST['longitude']);
+    $bixo->setImg('bixo'.$idBixo.'.png');
+
+
+    $X = $bixo->atualizarBixo();
+    if($X){
+        // header('Location: listaBixo.php?atualizado=' . ($idBixo));
+        listarBixo();
         exit;
     }else{
         echo "Bixo de ID = " . $idBixo . ' sem alterações!';
@@ -115,27 +128,23 @@ function editarBixo(){
 function atualizarBixo()
 {
     if(empty($_POST['nome'])){
+        die('aki');
         header('Location: cadastrobixo.php?opcao=editar&id='.$_POST['id']);
         exit;
     }
 
-    $carregou = carregarFotoBixo($_FILES['foto'], $_POST['nome']);
-    if($carregou){
-        header('Location: listagem.php?error=4');
-        exit;
-    }else{
-        echo 'Algum erro aconteceu'. $_FILES['foto']['error'];
-    }
+    $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
     editarBixo();
     
 }
 
 function cadastrarBixo(){
     if (!empty($_POST['nome'])){
-        $bixo = new Bixo($_POST['nome'],$_POST['descricaoBixo'],$_POST['Vida'],$_POST['ValorDefesa'],$_POST['Ataque'],$_POST['descImg'],$_POST['Latitude'],$_POST['Longitude']);
+        $bixo = new Bixo($_POST['nome'],$_POST['descricao'],$_POST['vida'],$_POST['defesa'],$_POST['ataque'],'bixo.png',$_POST['latitude'],$_POST['longitude']);
 
         if($bixo->cadastrarBixo()){
-            header('Location: listabixo.php?cadastro=' . $_POST['nome']);
+            // header('Location: listabixo.php?cadastro=' . $_POST['nome']);
+            listarBixo();
             exit;
         }else{
             echo "bixo de nome = " . $_POST['nome'] . ' Não cadastrado! #DeuTreta';

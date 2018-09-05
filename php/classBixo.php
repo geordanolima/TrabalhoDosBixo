@@ -169,32 +169,24 @@ class Bixo
 
     public function cadastrarBixo()
     {
-        $sql = 'INSERT INTO bixos (nome, 
-                                   descricao, 
-                                   vida, 
-                                   ataque, 
-                                   defesa, 
-                                   lati, 
-                                   long, 
-                                   img) 
-                           VALUES (:nome, 
-                                   :descricao, 
-                                   :vida, 
-                                   :ataque, 
-                                   :defesa, 
-                                   :lati, 
-                                   :long, 
-                                   :img)';
+        $sql = "INSERT INTO bixos (bixos.nome, 
+                                   bixos.descricao, 
+                                   bixos.vida, 
+                                   bixos.ataque, 
+                                   bixos.defesa, 
+                                   bixos.lati, 
+                                   bixos.long, 
+                                   bixos.img) 
+                           VALUES ('" . $this->nome . "', 
+                                   '" . $this->descricao ."', 
+                                    " . $this->vida . ", 
+                                    " . $this->ataque . ", 
+                                    " . $this->defesa . ", 
+                                   '" . $this->lati . "', 
+                                   '" . $this->long . "', 
+                                   '" . $this->img . "')";
         $conexao = $this->database->getConexao();
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-        $consulta->bindValue(':descricao', $this->descricao, PDO::PARAM_STR);
-        $consulta->bindValue(':vida', $this->vida, PDO::PARAM_INT);
-        $consulta->bindValue(':ataque', $this->ataque, PDO::PARAM_INT);
-        $consulta->bindValue(':defesa', $this->defesa, PDO::PARAM_INT);
-        $consulta->bindValue(':lati', $this->lati, PDO::PARAM_STR);
-        $consulta->bindValue(':long', $this->long, PDO::PARAM_STR);
-        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
 
         return  $consulta->execute();
     }
@@ -202,27 +194,20 @@ class Bixo
     public function atualizarBixo()
     {
         if ($this->id != null) {
-            $sql = 'UPDATE bixos SET (nome = :nome,
-                                    descricao = :descricao, 
-                                    vida = :vida, 
-                                    ataque = :ataque, 
-                                    defesa = :defesa, 
-                                    lati = :lati, 
-                                    long = :long, 
-                                    img = :img)
-                    WHERE id = :id;';
+            $sql = "UPDATE bixos SET bixos.nome = '" . $this->nome . "',
+                                    bixos.descricao = '" . $this->descricao ."', 
+                                    bixos.vida = " . $this->vida . ", 
+                                    bixos.ataque = " . $this->ataque . ", 
+                                    bixos.defesa = " . $this->defesa . ", 
+                                    bixos.lati = '" . $this->lati . "', 
+                                    bixos.long = '" . $this->long . "', 
+                                    bixos.img = 'bixo" . $this->id . ".png'
+                    WHERE bixos.id = " . $this->id . ";";
             $conexao = $this->database->getConexao();
             $consulta = $conexao->prepare($sql);
-            $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-            $consulta->bindValue(':descricao', $this->descricao, PDO::PARAM_STR);
-            $consulta->bindValue(':vida', $this->vida, PDO::PARAM_INT);
-            $consulta->bindValue(':ataque', $this->ataque, PDO::PARAM_INT);
-            $consulta->bindValue(':defesa', $this->defesa, PDO::PARAM_INT);
-            $consulta->bindValue(':lati', $this->lati, PDO::PARAM_STR);
-            $consulta->bindValue(':long', $this->long, PDO::PARAM_STR);
-            $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-            $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);                    
+            
             return  $consulta->execute();
+            
         } else {
             return false;
         }
