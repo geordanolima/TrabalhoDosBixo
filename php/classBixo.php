@@ -249,10 +249,11 @@ class Bixo
     }
 
     public function buscarBixo(){
+        // die($this->id);
         $sql = 'SELECT * FROM bixos WHERE id = :id';
         $conexao = $this->database->getConexao();
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $retornoQuery = $consulta->execute();
 
         if(!$retornoQuery) return false;

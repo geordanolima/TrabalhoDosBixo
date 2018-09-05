@@ -26,7 +26,7 @@
             <div class="card-header">Cadastrar um bicho:</div>
             <div class="card-body">
                 <form method="post" action="Funcoesbixo.php" enctype="multipart/form-data">
-                    <input type="hidden" name="op" 
+                 <input type="hidden" name="op" 
                         value="<?=(isset($_GET['id'])) ? 'atualizar' : 'cadastro';?>">
                     <input type="hidden" name="id" 
                         value="<?=(isset($_GET['id'])) ? $_GET['id'] : '';?>">
@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <label for="inputDefesa">Descrição</label>
                                 <input type="text" class="form-control" name="descricaoBixo"  placeholder="Descrição do bixo" 
-                                    value="<?=(isset($_GET['id'])) ? $dadosbixo['descricaoBixo'] : '';?>">
+                                    value="<?=(isset($_GET['id'])) ? $dadosbixo['descricao'] : '';?>">
                             </div>   
                             <div class="col-md-6">
                                 <label for="inputVida">Vida</label>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <img src="<?=(isset($_GET['id'])) ? $dadosbixo['img'] : '../public/imgs/padrao.png' ?>" height="90px" width="90px" style="border-radius: 50%;">
+                                    <img src="<?=(isset($_GET['id'])) ? '../public/imgs/' . $dadosbixo['descImg'] : '../public/imgs/padrao.png' ?>" height="90px" width="90px" style="border-radius: 50%;">
                                 </div>
                             </div>
                         </div>

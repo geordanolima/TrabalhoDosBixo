@@ -72,19 +72,20 @@ function buscarBixo()
     }
       
     $idBixo = strip_tags($_GET['id']);
-    $Bixo = new Bixo('nome', 'descricao', '10', '15', '20', 'bixo1', '654', '123');
+    $Bixo = new Bixo();
     $Bixo->setId($idBixo);
-    if($Bixo->buscarBixo()){
+    $achou = $Bixo->buscarBixo();
+    if($achou){
         $dadosbixo = [
-            'id'            => $Bixo->getId(),
-            'nome'          => $Bixo->getNome(),
-            'descricaoBixo' => $Bixo->getDescricao(),
-            'Vida'          => $Bixo->getVida(),
-            'ValorDefesa'   => $Bixo->getDefesa(),
-            'Ataque'        => $Bixo->getAtaque(),
-            'descImg'       => $Bixo->getImagem(),
-            'Latitude'      => $Bixo->getLatitude(),
-            'Longitude'     => $Bixo->getLongitude()
+            'id'            => $achou->getId(),
+            'nome'          => $achou->getNome(),
+            'descricao'     => $achou->getDescricao(),
+            'vida'          => $achou->getVida(),
+            'defesa'        => $achou->getDefesa(),
+            'ataque'        => $achou->getAtaque(),
+            'descImg'       => $achou->getimg(),
+            'latitude'      => $achou->getlati(),
+            'longitude'     => $achou->getlong()
         ];
         require_once('cadastroBixo.php');
         exit;         
