@@ -247,7 +247,6 @@ class Bixo
     }
 
 
-   
 
     /**
      * Get the value of descricao

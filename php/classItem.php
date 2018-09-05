@@ -177,13 +177,21 @@ class Item
         $consulta->bindValue(':bonus', $this->bonus, PDO::PARAM_INT);
         $consulta->bindValue(':valor', $this->valor, PDO::PARAM_INT);
         $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-        $retornoQuery = $update->execute();
-        //update executado com sucesso:
-        if($retornoQuery) return true;
+       
+        return $update->execute();
     }
     return false;
    }
+   
    public function buscarItem(){
-       return  true;
+    $sql = 'SELECT * FROM itens WHERE id = :id';
+    $conexao = $this->database->getConexao();
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+    $retornoQuery = $consulta->execute();
+
+    if(!$retornoQuery) return false;
+    $registro = $consulta->fetchObject('classItem');
+    return $registro;
    }
 }
