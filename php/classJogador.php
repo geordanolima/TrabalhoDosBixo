@@ -33,36 +33,85 @@ class Jogador
     // }
 
     public function cadastrarJogador(){
-         //teremos futuramente um INSERT INTO TITULARES
-            //                          (nome, documento)
-            //                      VALUES
-            //                  ($this->nome, $this->documento )
-        //executo a query
-        $retornoQuery = 1; //insert executado com sucesso
-        if($retornoQuery) return true;
-        return false;
+        $sql = 'INSERT INTO jogador (nome, 
+                                   apelido, 
+                                   genero, 
+                                   email, 
+                                   img, 
+                                   senha) 
+                           VALUES (:nome, 
+                                   :apelido, 
+                                   :genero, 
+                                   :email, 
+                                   :img, 
+                                   :senha)';
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $consulta->bindValue(':apelido', $this->apelido, PDO::PARAM_STR);
+        $consulta->bindValue(':genero', $this->genero, PDO::PARAM_INT);
+        $consulta->bindValue(':email', $this->email, PDO::PARAM_INT);
+        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+        $consulta->bindValue(':senha', $this->senha, PDO::PARAM_STR);
+
+        return  $consulta->execute();
     }
 
    public function excluirJogador(){
-        //fazer delete from item where id=$this->id
-        return true;
+    if($this->id != null){
+        $conexao = $this->database->getConexao();
+        $retornoQuery = $conexao->exec('DELETE FROM jogador 
+                                        WHERE id =' . $this->id);
+        return $retornoQuery;
+    }
+    return false;
    }
 
    public function listarJogador(){
-        return true;
+    $conexao = $this->database->getConexao();
+    $consulta = $conexao->prepare('SELECT * FROM jogador');
+    $consulta->execute();
+    return $consulta->fetchAll(PDO::FETCH_CLASS, 'classJogador');
    }
 
    public function atualizarJogador(){
-        return true;   
+    if ($this->id != null) {
+        $sql = 'UPDATE jogador SET (nome = :nome,
+                                descricao = :descricao, 
+                                vida = :vida, 
+                                ataque = :ataque, 
+                                defesa = :defesa, 
+                                lati = :lati, 
+                                long = :long, 
+                                img = :img)
+                WHERE id = :id;';
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $consulta->bindValue(':apelido', $this->apelido, PDO::PARAM_STR);
+        $consulta->bindValue(':genero', $this->genero, PDO::PARAM_INT);
+        $consulta->bindValue(':email', $this->email, PDO::PARAM_INT);
+        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
+        $consulta->bindValue(':senha', $this->senha, PDO::PARAM_STR);                 
+        return  $consulta->execute();
+    } else {
+        return false;
+    }  
    }
 
    public function buscaJogador(){
-       return true;
+    $sql = 'SELECT * FROM jogador WHERE id = :id';
+    $conexao = $this->database->getConexao();
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+    $retornoQuery = $consulta->execute();
+
+    if(!$retornoQuery) return false;
+    $registro = $consulta->fetchObject('classJogador');
+    return $registro;
    }
 
    
-
-
 
     /**
      * Get the value of id
