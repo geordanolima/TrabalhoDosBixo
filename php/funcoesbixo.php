@@ -109,13 +109,22 @@ function atualizarBixo(){
         header('Location: cadastrobixo.php?opcao=editar&id='.$_POST['id']);
         exit;
     }
-    $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
+    if(!empty($_FILES['foto'])){
+        $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
+    }
     editarBixo();    
 }
 
 function cadastrarBixo(){
     if (!empty($_POST['nome'])){
-        $bixo = new Bixo($_POST['nome'],$_POST['descricao'],$_POST['vida'],$_POST['defesa'],$_POST['ataque'],'bixo.png',$_POST['latitude'],$_POST['longitude']);
+        $bixo = new Bixo(   $_POST['nome'],
+                            $_POST['descricao'],
+                            $_POST['vida'],
+                            $_POST['defesa'],
+                            $_POST['ataque'],
+                            'bixo.png',
+                            $_POST['latitude'],
+                            $_POST['longitude']);
         if($bixo->cadastrarBixo()){
             listarBixo();
             exit;

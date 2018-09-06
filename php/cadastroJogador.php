@@ -36,7 +36,7 @@
                             <!-- Nome Jogador -->
                                 <label for="inputNome">Nome</label>
                                 <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome Jogador" required
-                                    value="<?=(isset($bagaca)) ? $bagaca['nome'] : '';?>">
+                                    value="<?=(isset($_GET['id'])) ? $bagaca['nome'] : '';?>">
                         </div>
                     </div>
                     <div class="form-group">

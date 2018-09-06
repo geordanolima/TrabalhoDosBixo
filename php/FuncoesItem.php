@@ -102,7 +102,7 @@ function atualizarItem(){
         listarItem();
         exit;
     }
-    $carregou = carregarFotoItem($_FILES['imagem'], $_POST['id']);
+    $carregou = carregarFotoItem($_FILES['imagem'], $_POST['id']); //verificar essa linha que ta gerando erro
     editaritem();
 }
 

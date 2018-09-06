@@ -1,9 +1,7 @@
 <?php
 require('classJogador.php');
-
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
-    // die($opcao);
     switch($opcao){
         case 'excluir':
             excluirjogador();
@@ -27,9 +25,7 @@ if (isset($_REQUEST['op'])){
     }   
 }
 
-function carregarFotoJogador($arquivoEmProcesso, $idjogador)
-{
-    
+function carregarFotoJogador($arquivoEmProcesso, $idjogador){
     $mimesValidos = [
         'image/png',
         'image/jpg',
@@ -42,9 +38,7 @@ function carregarFotoJogador($arquivoEmProcesso, $idjogador)
     return $validacao;
 }
 
-function excluirjogador()
-{
-
+function excluirjogador(){
     if(!isset($_GET['id'])){
         header('Location: ListaJogador.html?erro=1');
         exit;
@@ -53,7 +47,7 @@ function excluirjogador()
     $jogador = new Jogador();
     $jogador->setId($idjogador);
     if($jogador->excluirJogador()){
-        header('Location: listaJogador.php?excluido=' . ($idjogador));
+        listarJogador();
         exit;  
     }else{
         echo "Jogador de ID = " . $idjogador . 'não pode ser excluido!';
@@ -68,19 +62,22 @@ function buscaJogador(){
     }
 
     $idjogador = strip_tags($_GET['id']);
-    $jogador = new Jogador('nome','apelido','Masculino','email@email.com','jog1.png','senha');
+    $jogador = new Jogador();
     $jogador->setId($idjogador);
-    if($jogador->buscaJogador()){
+    $achou = $jogador->buscaJogador();
+    if($achou){
         $bagaca = [
-            'id'            => $jogador->getid(),
-            'nome'          => $jogador->getnome(),
-            'apelido'       => $jogador->getapelido(),
-            'genero'        => $jogador->getgenero(),
-            'email'         => $jogador->getemail(),
-            'senha'         => $jogador->getsenha(),
-            'descImg'       => $jogador->geturlImagem(),
-            'img'           => '../public/imgs/' . $jogador->geturlImagem()
+            'id'            => $achou->getId(),
+            'nome'          => $achou->getNome(),
+            'apelido'       => $achou->getApelido(),
+            'genero'        => $achou->getGenero(),
+            'email'         => $achou->getEmail(),
+            'senha'         => $achou->getSenha(),
+            'descImg'       => $achou->getImagem(),
+            'img'           => '../public/imgs/' . $achou->getImagem()
         ];
+        
+
         require_once('cadastroJogador.php');
         exit;      
     }else{
@@ -93,21 +90,23 @@ function editarjogador(){
     $idjogador = strip_tags($_REQUEST['id']);
     $jogador = new Jogador();
     $jogador->setId($idjogador);
+    $jogador->setNome($_POST['nome']);
+    $jogador->setApelido($_POST['apelido']);
+    $jogador->setGenero($_POST['genero']);
+    $jogador->setEmail($_POST['email']);
+    $jogador->setSenha($_POST['senha']);
+    $jogador->setImagem($_POST['imagem']);
     if($jogador->atualizarJogador()){
-        header('Location: listaJogador.php?atualizado=' . ($idjogador));
+        listarJogador();
         exit;
     }else{
         echo "Jogador de ID = " . $idjogador . ' sem alterações!';
-    }
-    
-    require_once('listaJogador.php');
+    }    
+    listarJogador();
     exit;
-
 }
 
-
-function atualizarjogador()
-{       
+function atualizarjogador(){       
     if(empty($_POST['nome'])){
         header('Location: cadastroJogador.php');
         exit;
@@ -116,14 +115,6 @@ function atualizarjogador()
         $carregou = carregarFotoJogador($_FILES['foto'], $_POST['id']);
     }
     editarjogador();    
-}
-
-function listarjogador(){
-    $vetor = array();
-    array_push($vetor, listaJogador());
-
-    header('Location: listaJogador.php');
-    exit;
 }
 
 function cadastrarJogador(){
@@ -135,14 +126,26 @@ function cadastrarJogador(){
         } else {
             $sex = 'Outro';
         }
-
-        $jogador = new Jogador($_POST['nome'],$_POST['apelido'],$sex,$_POST['email'],$_POST['imagem'],$_POST['senha']);
+        $jogador = new Jogador( $_POST['nome'],
+                                $_POST['apelido'],
+                                $sex,
+                                $_POST['email'],
+                                $_POST['imagem'],
+                                $_POST['senha']);
 
         if($jogador->cadastrarJogador()){
-            header('Location: listaJogador.php?cadastro=' . $_POST['nome']);
+            listarJogador();
             exit;
         }else{
             echo "Jogador de nome = " . $_POST['nome'] . ' Não cadastrado! #DeuTreta';
         }    
     }
+}
+
+function listarJogador(){
+    $vetor = array();
+    $jogador = new Jogador();
+    $vetor = $jogador->listarJogador();
+    require_once('listaJogador.php');
+    exit;
 }

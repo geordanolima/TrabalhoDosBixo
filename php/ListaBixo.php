@@ -57,30 +57,26 @@
                 </div>
                 <div class="card-body">
                     <form>
-                        <?php
-                            foreach ($vetor as $registro) {
-                                // if(!(isset($_GET['excluido']) && ($_GET['excluido'] == $registro->getId()))){
-                                    ?>
-                                    <div class="form-group">
-                                        <div class="form-row" >
-                                            <div class="col-md-9">
-                                                <label for="inputBixo1">Nome</label>
-                                                <input type="text" class="form-control" id="inputBixo1"  value="<?=$registro->getNome()?>" disabled>
+                        <?php foreach ($vetor as $registro) { ?>
+                            <div class="form-group">
+                                <div class="form-row" >
+                                    <div class="col-md-9">
+                                        <label for="inputBixo1">Nome</label>
+                                        <input type="text" class="form-control" id="inputBixo1"  value="<?=$registro->getNome()?>" disabled>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class=" form-row" style="padding-top: 30px;">
+                                            <div class="col-md-6">
+                                                <a href="FuncoesBixo.php?op=editar&id=<?=$registro->getId()?>" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class=" form-row" style="padding-top: 30px;">
-                                                    <div class="col-md-6">
-                                                        <a href="FuncoesBixo.php?op=editar&id=<?=$registro->getId()?>" class="btn btn-block btn-warning"role="button" aria-pressed="true">Editar</a>                                            
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <a href="FuncoesBixo.php?op=excluir&id=<?=$registro->getId()?>" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-6">
+                                                <a href="FuncoesBixo.php?op=excluir&id=<?=$registro->getId()?>" class="btn btn-block btn-danger"role="button" aria-pressed="true">Excluir</a>
                                             </div>
                                         </div>
-                                    </div> 
-                            <?php 
-                                } ?>
+                                    </div>
+                                </div>
+                            </div> 
+                        <?php } ?>
                     </form>
                 </div>
             </div>

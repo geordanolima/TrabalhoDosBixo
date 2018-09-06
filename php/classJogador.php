@@ -1,4 +1,5 @@
 <?php
+require_once('Conexao.php');
 class Jogador
 {
     private $id;
@@ -6,110 +7,89 @@ class Jogador
     private $apelido;
     private $genero;
     private $email;
-    private $urlImagem;
+    private $imagem;
     private $senha;
 
-    public function __construct($nome = null, $apelido = null, $genero = null, $email = null, $urlImagem = null, $senha = null)
-    {  
+    public function __construct($nome = null, 
+                                $apelido = null, 
+                                $genero = null, 
+                                $email = null, 
+                                $imagem = null, 
+                                $senha = null){  
         if($nome != null) $this->nome = $nome;
         if($apelido != null) $this->apelido = $apelido;
         if($genero != null) $this->genero = $genero;
         if($email != null) $this->email = $email;
-        if($urlImagem != null) $this->urlImagem = $urlImagem;
+        if($imagem != null) $this->imagem = $imagem;
         if($senha != null) $this->senha = $senha;
+
+        $this->database = Conexao::getInstancia();
     }
-
-    //refatoracao com o projeto em andamento com o
-    //intuito de diminuir impacto da manutencao,
-    //na ideia de gerar menos bugs em manutencoes
-    // public function salvar()
-    // {
-
-    //     if($this->id != null) return $this->atualizar();
-
-    //     if($this->id == null) return $this->criar();
-
-    //     return false;
-    // }
 
     public function cadastrarJogador(){
-        $sql = 'INSERT INTO jogador (nome, 
-                                   apelido, 
-                                   genero, 
-                                   email, 
-                                   img, 
-                                   senha) 
-                           VALUES (:nome, 
-                                   :apelido, 
-                                   :genero, 
-                                   :email, 
-                                   :img, 
-                                   :senha)';
+        $sql = "INSERT INTO jogador (jogador.nome, 
+                                    jogador.apelido, 
+                                    jogador.genero, 
+                                    jogador.email, 
+                                    jogador.img, 
+                                    jogador.senha) 
+                            VALUES ('" . $this->nome . "', 
+                                    '" . $this->apelido . "', 
+                                    '" . $this->genero . "', 
+                                    '" . $this->email . "', 
+                                    '" . $this->imagem . "', 
+                                    '" . $this->senha . "');";
         $conexao = $this->database->getConexao();
         $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-        $consulta->bindValue(':apelido', $this->apelido, PDO::PARAM_STR);
-        $consulta->bindValue(':genero', $this->genero, PDO::PARAM_INT);
-        $consulta->bindValue(':email', $this->email, PDO::PARAM_INT);
-        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-        $consulta->bindValue(':senha', $this->senha, PDO::PARAM_STR);
 
         return  $consulta->execute();
     }
 
-   public function excluirJogador(){
-    if($this->id != null){
-        $conexao = $this->database->getConexao();
-        $retornoQuery = $conexao->exec('DELETE FROM jogador 
-                                        WHERE id =' . $this->id);
-        return $retornoQuery;
+    public function atualizarJogador(){
+        if ($this->id != null) {
+            $sql = "UPDATE jogador SET  nome = '" . $this->nome . "',
+                                        apelido = '" . $this->apelido . "', 
+                                        genero = '" . $this->genero . "', 
+                                        email = '" . $this->email . "', 
+                                        img = 'item" . $this->id . ".png', 
+                                        senha = '" . $this->senha . "'
+                    WHERE id = " . $this->senha . ";";
+            $conexao = $this->database->getConexao();
+            $consulta = $conexao->prepare($sql);                
+            return  $consulta->execute();
+        } else {
+            return false;
+        }  
     }
-    return false;
-   }
 
-   public function listarJogador(){
-    $conexao = $this->database->getConexao();
-    $consulta = $conexao->prepare('SELECT * FROM jogador');
-    $consulta->execute();
-    return $consulta->fetchAll(PDO::FETCH_CLASS, 'classJogador');
-   }
-
-   public function atualizarJogador(){
-    if ($this->id != null) {
-        $sql = 'UPDATE jogador SET (nome = :nome,
-                                descricao = :descricao, 
-                                vida = :vida, 
-                                ataque = :ataque, 
-                                defesa = :defesa, 
-                                lati = :lati, 
-                                long = :long, 
-                                img = :img)
-                WHERE id = :id;';
-        $conexao = $this->database->getConexao();
-        $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-        $consulta->bindValue(':apelido', $this->apelido, PDO::PARAM_STR);
-        $consulta->bindValue(':genero', $this->genero, PDO::PARAM_INT);
-        $consulta->bindValue(':email', $this->email, PDO::PARAM_INT);
-        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-        $consulta->bindValue(':senha', $this->senha, PDO::PARAM_STR);                 
-        return  $consulta->execute();
-    } else {
+    public function excluirJogador(){
+        if($this->id != null){
+            $conexao = $this->database->getConexao();
+            $retornoQuery = $conexao->exec('DELETE FROM jogador 
+                                            WHERE id =' . $this->id);
+            return $retornoQuery;
+        }
         return false;
-    }  
-   }
+    }
 
-   public function buscaJogador(){
-    $sql = 'SELECT * FROM jogador WHERE id = :id';
-    $conexao = $this->database->getConexao();
-    $consulta = $conexao->prepare($sql);
-    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-    $retornoQuery = $consulta->execute();
+    public function listarJogador(){
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare('SELECT * FROM jogador');
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Jogador');
+    }   
 
-    if(!$retornoQuery) return false;
-    $registro = $consulta->fetchObject('classJogador');
-    return $registro;
-   }
+    public function buscaJogador(){
+        $conexao = $this->database->getConexao();
+        $sql = "SELECT * FROM jogador WHERE id = " . $this->id . ";";
+        $consulta = $conexao->prepare($sql);
+        $retornoQuery = $consulta->execute();
+        if(!$retornoQuery){
+            return false;
+        }
+        $registro = $consulta->fetchObject('Jogador');
+        return $registro;
+    }
 
    
 
@@ -149,26 +129,6 @@ class Jogador
     public function setSenha($senha)
     {
         $this->senha = $senha;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of urlImagem
-     */ 
-    public function getUrlImagem()
-    {
-        return $this->urlImagem;
-    }
-
-    /**
-     * Set the value of urlImagem
-     *
-     * @return  self
-     */ 
-    public function setUrlImagem($urlImagem)
-    {
-        $this->urlImagem = $urlImagem;
 
         return $this;
     }
@@ -253,4 +213,24 @@ class Jogador
         return $this;
     }
 
+
+    /**
+     * Get the value of imagem
+     */ 
+    public function getImagem()
+    {
+        return $this->imagem;
+    }
+
+    /**
+     * Set the value of imagem
+     *
+     * @return  self
+     */ 
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
+
+        return $this;
+    }
 }
