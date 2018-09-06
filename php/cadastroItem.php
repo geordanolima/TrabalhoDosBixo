@@ -1,22 +1,17 @@
 <?php
     require_once('FuncoesLogin.php');
+    require_once('Funcoeshtml.php');
     isAutenticado();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php
-        require_once('Funcoeshtml.php');
-        montaHeader();
-    ?>
+    <?php montaHeader();?>
     <title>Cadastro do Item</title>
 
 </head>
 <body>
-    <?php
-        require_once('Funcoeshtml.php');
-        montamenu();
-    ?>
+    <?php montamenu();?>
 
  <!-- ############################################################################### -->
     
@@ -36,12 +31,12 @@
                                 <div class="col-md-6">
                                     <label for="inputItem">Nome</label>
                                     <input type="text" class="form-control" id="inputItem" name="nome" placeholder="Nome Item" required
-                                        value="<?=(isset($Item)) ? $Item['nome'] : '';?>">
+                                        value="<?=(isset($item)) ? $item['nome'] : '';?>">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="inputGenero">Bônus</label>
-                                    <select id="inputGenero" name="genero" class="form-control" required 
-                                        value="<?=(isset($Item)) ? $Item['genero'] : '';?>">
+                                    <label for="inputBonus">Bônus</label>
+                                    <select id="inputBonus" name="bonus" class="form-control" required 
+                                        value="<?=(isset($item)) ? $item['bonus'] : '';?>">
                                         <option selected>Água</option>
                                         <option>Fogo</option>
                                         <option>Terra</option>
@@ -53,19 +48,26 @@
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="inputValor">Valor Item</label>
-                                    <input type="number" class="form-control" name="ValorItem" min="0" max="100" step="10" placeholder="0" required 
-                                        value="<?=(isset($Item)) ? $Item['ValorItem'] : '';?>">
+                                    <input type="number" class="form-control" name="valor" min="0" max="100" step="10" placeholder="0" required 
+                                        value="<?=(isset($item)) ? $item['valor'] : '';?>">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="customFileLang">Imagem Item</label>
-                                    <div class="input-group form-row">
-                                        <input type="text" class="form-control" name="imagem" readonly=""
-                                            value="<?=(isset($Item)) ? $Item['imagem'] : '';?>">
-                                        <label style="height: 10px;">
-                                            <span class="btn btn-primary input-group-btn">
-                                                Buscar <input type="file" style="display: none;" multiple=""> 
-                                            </span>
-                                        </label>
+                                <div class="col-md-4">
+
+                                    <div class="form-row">
+                                        <div class="col-md-10">
+                                            <label for="customFileLang">Imagem Item</label>
+                                            <div class="input-group form-row">
+                                                <input type="text" class="form-control" readonly="" name="imagem" value="<?=(isset($_GET['id'])) ? $item['imagem'] : '';?>">
+                                                <label style="height: 10px;">
+                                                    <span class="btn btn-primary input-group-btn">
+                                                        Buscar <input type="file" style="display: none;" multiple="" name="foto" accept="image/*"> 
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <img src="<?=(isset($_GET['id'])) ? '../public/imgs/' . $item['imagem'] : '../public/imgs/padrao.png' ?>" height="90px" width="90px" style="border-radius: 50%;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

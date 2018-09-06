@@ -1,10 +1,8 @@
 <?php
-
 require_once('classBixo.php');
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
     switch($opcao){
-
         case 'excluir':
             excluirBixo();
             break;
@@ -27,9 +25,7 @@ if (isset($_REQUEST['op'])){
     }
 }
 
-function carregarFotoBixo($arquivoEmProcesso, $idbixo)
-{
-    
+function carregarFotoBixo($arquivoEmProcesso, $idbixo){
     $mimesValidos = [
         'image/png',
         'image/jpg',
@@ -43,10 +39,7 @@ function carregarFotoBixo($arquivoEmProcesso, $idbixo)
     return $validacao;
 }
 
-
- function excluirBixo()
-{
-
+function excluirBixo(){
     if(!isset($_GET['id'])){
         header('Location: ListaBixo.html?erro=404');
         exit;
@@ -55,23 +48,17 @@ function carregarFotoBixo($arquivoEmProcesso, $idbixo)
     $Bixo = new Bixo();
     $Bixo->setId($idBixo);
     if($Bixo->excluirBixo()){
-        header('Location: ListaBixo.php?excluido=' . ($idBixo));
-        exit;   
+        listarBixo();
     }else{
         echo "Bixo de ID = " . $idBixo . 'não pode ser excluido!';
     }
-    //pesquiso no banco de dados o registro ID = 1
-    //achado registro, executar comando DELETE ID = 1
-    //em caso de sucesso verificar retorno para true, senao false
 }
 
-function buscarBixo()
-{
+function buscarBixo(){
     if(!isset($_GET['id'])){
         header('Location: ListaBixo.html?erro=404');
         exit;
-    }
-      
+    }      
     $idBixo = strip_tags($_GET['id']);
     $Bixo = new Bixo();
     $Bixo->setId($idBixo);
@@ -93,11 +80,9 @@ function buscarBixo()
     }else{
         echo "Bixo de ID = " . $idBixo . ' nao encontrado!';
     }
-
 }
 
-function editarBixo(){
-    
+function editarBixo(){    
     $idBixo = strip_tags($_REQUEST['id']);
     $bixo = new Bixo();
     $bixo->setId($idBixo);
@@ -109,41 +94,29 @@ function editarBixo(){
     $bixo->setLati($_POST['latitude']);
     $bixo->setLong($_POST['longitude']);
     $bixo->setImg('bixo'.$idBixo.'.png');
-
-
-    $X = $bixo->atualizarBixo();
-    if($X){
-        // header('Location: listaBixo.php?atualizado=' . ($idBixo));
+    if($bixo->atualizarBixo()){
         listarBixo();
         exit;
     }else{
         echo "Bixo de ID = " . $idBixo . ' sem alterações!';
-    }
-    
+    }    
     require_once('listaBixo.php');
     exit;
-
 }
 
-function atualizarBixo()
-{
+function atualizarBixo(){
     if(empty($_POST['nome'])){
-        die('aki');
         header('Location: cadastrobixo.php?opcao=editar&id='.$_POST['id']);
         exit;
     }
-
     $carregou = carregarFotoBixo($_FILES['foto'], $_POST['id']);
-    editarBixo();
-    
+    editarBixo();    
 }
 
 function cadastrarBixo(){
     if (!empty($_POST['nome'])){
         $bixo = new Bixo($_POST['nome'],$_POST['descricao'],$_POST['vida'],$_POST['defesa'],$_POST['ataque'],'bixo.png',$_POST['latitude'],$_POST['longitude']);
-
         if($bixo->cadastrarBixo()){
-            // header('Location: listabixo.php?cadastro=' . $_POST['nome']);
             listarBixo();
             exit;
         }else{
@@ -159,4 +132,3 @@ function listarBixo(){
     require_once('listabixo.php');
     exit;
 }
-

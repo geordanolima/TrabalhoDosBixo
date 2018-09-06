@@ -1,4 +1,5 @@
 <?php
+require_once('Conexao.php');
 class Item
 {
     private $id;
@@ -7,14 +8,78 @@ class Item
     private $bonus;
     private $imagem;
 
-    public function __construct($nome = null, $valor = null, $bonus = null, $imagem = null){
+    public function __construct($nome = null, 
+                                $valor = null, 
+                                $bonus = null, 
+                                $imagem = null){
         if($nome != null) $this->nome = $nome;
         if($valor != null) $this->valor = $valor;
         if($bonus != null) $this->bonus = $bonus;
         if($imagem != null) $this->imagem = $imagem;
+
+        $this->database = Conexao::getInstancia();
     }
 
+    public function cadastrarItem(){
+        $sql = "INSERT INTO itens ( itens.nome, 
+                                    itens.bonus, 
+                                    itens.valor, 
+                                    itens.img) 
+                            VALUES ('" . $this->nome . "', 
+                                    '" . $this->bonus . "',
+                                     " . $this->valor . ", 
+                                    '" . $this->imagem . "');";
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare($sql);        
 
+        return $consulta->execute();       
+    }
+
+    public function atualizarItem(){
+        if($this->id != null){
+            $conexao = $this->database->getConexao();            
+            $sql = "UPDATE itens SET 
+                                itens.nome = '" . $this->nome . "',
+                                itens.bonus = '" . $this->bonus . "' ,
+                                itens.valor = " . $this->valor . " ,
+                                itens.img = '" . $this->imagem . "'  
+                    WHERE id = " . $this->id . ";";
+            $update = $conexao->prepare($sql);
+            return $update->execute();
+        } else {
+            return false;
+        }
+    }
+
+    public function excluirItem(){
+        if($this->id != null){
+            $conexao = $this->database->getConexao();
+            $retornoQuery = $conexao->exec('DELETE FROM itens 
+                                            WHERE id =' . $this->id);
+            return $retornoQuery;
+        }
+        return false;
+    }
+
+   public function ListarItens(){        
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->prepare('SELECT * FROM itens');
+        $consulta->execute();
+        
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Item');
+   }
+   
+   public function buscarItem(){
+    $conexao = $this->database->getConexao();    
+    $consulta = $conexao->prepare('SELECT * FROM itens WHERE id = ' . $this->id . ';');
+    $retornoQuery = $consulta->execute();
+
+    if(!$retornoQuery) {
+        return false;
+    }
+    $item = $consulta->fetchObject('Item');
+    return $item;
+   }
 
     /**
      * Get the value of bonus
@@ -115,83 +180,4 @@ class Item
 
         return $this;
     }
-
-
-
-
-    //refatoracao com o projeto em andamento com o
-    //intuito de diminuir impacto da manutencao,
-    //na ideia de gerar menos bugs em manutencoes
-    // public function salvar()
-    // {
-
-    //     if($this->id != null) return $this->atualizar();
-
-    //     if($this->id == null) return $this->criar();
-
-    //     return false;
-    // }
-
-    public function cadastrarItem(){
-        $sql = 'INSERT INTO itens (nome, bonus, valor, img) 
-        VALUES (:nome, :bonus, :valor, :img)';
-        $conexao = $this->database->getConexao();
-        $consulta = $conexao->prepare($sql);
-        $consulta->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-        $consulta->bindValue(':bonus', $this->bonus, PDO::PARAM_INT);
-        $consulta->bindValue(':valor', $this->valor, PDO::PARAM_INT);
-        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-        
-        return $consulta->execute();
-       
-    }
-
-   public function excluirItem(){
-    if($this->id != null){
-        $conexao = $this->database->getConexao();
-        $retornoQuery = $conexao->exec('DELETE FROM itens 
-                                        WHERE id =' . $this->id);
-        if($retornoQuery) return true;
-    }
-    return false;
-   }
-
-   public function listarItens(){
-    $sql = 'SELECT * FROM itens WHERE id = :id';
-    $conexao = $this->database->getConexao();
-    $consulta = $conexao->prepare($sql);
-    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-    $retornoQuery = $consulta->execute();
-    if(!$retornoQuery) return false;
-    $registro = $consulta->fetchObject('classItem');
-    return $registro;
-   }
-
-   public function atualizarItem(){
-    if($this->id != null){
-        $sql = 'UPDATE itens SET nome = :nome, 
-        WHERE id = :id';
-        $conexao = $this->database->getConexao();
-        $update = $conexao->prepare($sql);
-        $update->bindValue(':nome', $this->nome, PDO::PARAM_STR);
-        $consulta->bindValue(':bonus', $this->bonus, PDO::PARAM_INT);
-        $consulta->bindValue(':valor', $this->valor, PDO::PARAM_INT);
-        $consulta->bindValue(':img', $this->img, PDO::PARAM_STR);
-       
-        return $update->execute();
-    }
-    return false;
-   }
-   
-   public function buscarItem(){
-    $sql = 'SELECT * FROM itens WHERE id = :id';
-    $conexao = $this->database->getConexao();
-    $consulta = $conexao->prepare($sql);
-    $consulta->bindValue(':id', $id, PDO::PARAM_INT);
-    $retornoQuery = $consulta->execute();
-
-    if(!$retornoQuery) return false;
-    $registro = $consulta->fetchObject('classItem');
-    return $registro;
-   }
 }

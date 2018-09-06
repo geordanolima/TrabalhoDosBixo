@@ -1,6 +1,5 @@
 <?php
 require('classItem.php');
-
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
 
@@ -27,24 +26,21 @@ if (isset($_REQUEST['op'])){
     }   
 }
 
-
-function carregarFotoItem($arquivoEmProcesso, $idItem)
-{
-    
+function carregarFotoItem($arquivoEmProcesso, $iditem){ 
     $mimesValidos = [
         'image/png',
         'image/jpg',
         'image/jpeg'
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
+    
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/Item'.$idItem.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/item'.$iditem.'.png');   
     }
     return $validacao;
 }
 
- function excluirItem()
-{
+function excluirItem(){
     if(!isset($_GET['id'])){
         header('Location: istaItens.html?erro=404');
         exit;
@@ -53,33 +49,28 @@ function carregarFotoItem($arquivoEmProcesso, $idItem)
     $item = new Item();
     $item->setId($idItem);
     if($item->excluirItem()){
-        header('Location: listaItem.php?excluido=' . ($idItem));
-        exit; 
+        lisarItem();
     }else{
         echo "Item de ID = " . $idItem . 'não pode ser excluido!';
     }
-    //pesquiso no banco de dados o registro ID = 1
-    //achado registro, executar comando DELETE ID = 1
-    //em caso de sucesso verificar retorno para true, senao false
 }
 
-function buscarItem()
-{
+function buscarItem(){
     if(!isset($_GET['id'])){
         header('Location: listaItens.php?erro=404');
         exit;
     }
     $idItem = strip_tags($_GET['id']);
-    $item = new Item('nome','10','bonus','Item1.png');
+    $item = new Item();
     $item->setId($idItem);
-
-    if($item->buscarItem()){
-        $Item = [
-            'id'            => $item->getid(),
-            'nome'          => $item->getnome(),
-            'genero'        => $item->getbonus(),
-            'ValorItem'     => $item->getvalor(),
-            'imagem'        => $item->getImagem()
+    $achou = $item->buscarItem();
+    if($achou){
+        $item = [
+            'id'            => $achou->getId(),
+            'nome'          => $achou->getNome(),
+            'bonus'         => $achou->getBonus(),
+            'valor'         => $achou->getValor(),
+            'imagem'        => 'item' . $achou->getId() . '.png'
         ];
         require_once('cadastroItem.php');
         exit;      
@@ -88,47 +79,49 @@ function buscarItem()
     }
 }
 
-
 function editarItem(){
-    
     $idItem = strip_tags($_REQUEST['id']);
     $item = new Item();
     $item->setId($idItem);
+    $item->setNome($_POST['nome']);
+    $item->setBonus($_POST['bonus']);
+    $item->setValor($_POST['valor']);
+    $item->setImagem('Item' . $idItem . '.png');
     if($item->atualizarItem()){
-        header('Location: listaitem.php?atualizado=' . ($idItem));
+        listarItem();
         exit;
     }else{
         echo "Item de ID = " . $idItem . ' sem alterações!';
     }
-    
     require_once('listaItem.php');
     exit;
-
 }
 
-
-function atualizarItem()
-{
+function atualizarItem(){
     if(empty($_POST['nome'])){
-        header('Location: cadastroItem.php');
+        listarItem();
         exit;
     }
-    $carregou = carregarFotoItem($_FILES['foto'], $_POST['nome']);
-    if(!$carregou){
-        echo 'Algum erro aconteceu'. $_FILES['foto']['error'];
-    }
+    $carregou = carregarFotoItem($_FILES['imagem'], $_POST['id']);
     editaritem();
 }
 
 function cadastrarItem(){
     if (!empty($_POST['nome'])){
-        $item = new Item($_POST['nome'],$_POST['ValorItem'],$_POST['bonus'],$_POST['imagem']);
-
+        $item = new Item($_POST['nome'],$_POST['valor'],$_POST['bonus'],$_POST['imagem']);
         if($item->cadastrarItem()){
-            header('Location: listaItem.php?cadastro=' . $_POST['nome']);
+            listarItem();
             exit;
         }else{
             echo "Item de nome = " . $_POST['nome'] . ' Não cadastrado! #DeuTreta';
         }    
     }
+}
+
+function listarItem(){
+    $vetor = array();
+    $item = new Item();
+    $vetor = $item->ListarItens();
+    require_once('listaitem.php');
+    exit;
 }

@@ -1,23 +1,18 @@
 <?php
     require_once('FuncoesLogin.php');
+    require_once('Funcoeshtml.php');
     isAutenticado();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php
-        require_once('Funcoeshtml.php');
-        montaHeader();
-    ?>
+    <?php montaHeader(); ?>
     <title>Cadastro dos Bixo</title>
 
 </head>
 <body>
-    <?php
-        require_once('Funcoeshtml.php');
-        montamenu();
-    ?>
+    <?php montamenu(); ?>
 
 <!-- ############################################################################### -->
     
