@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Atualizar">
+                    <input type="submit" class="btn btn-primary btn-block" value="Cadastrar / Atualizar">
                 </form>
             </div>
         </div>
