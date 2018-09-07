@@ -51,9 +51,9 @@ class Jogador
                                         apelido = '" . $this->apelido . "', 
                                         genero = '" . $this->genero . "', 
                                         email = '" . $this->email . "', 
-                                        img = 'item" . $this->id . ".png', 
+                                        img = 'jogador" . $this->id . ".png', 
                                         senha = '" . $this->senha . "'
-                    WHERE id = " . $this->senha . ";";
+                    WHERE id = " . $this->id . ";";
             $conexao = $this->database->getConexao();
             $consulta = $conexao->prepare($sql);                
             return  $consulta->execute();

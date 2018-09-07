@@ -26,7 +26,7 @@
         <div class="card card-register ">
             <div class="card-header">Cadastrar um Jogador:</div>
             <div class="card-body">
-                <form class="container" action="FuncoesJogador.php" method="post">
+                <form class="container" action="FuncoesJogador.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="op" 
                         value="<?=(isset($_GET['id'])) ? 'atualizar' : 'cadastro';?>">
                     <input type="hidden" name="id" 
@@ -66,14 +66,21 @@
                                     value="<?=(isset($bagaca)) ? $bagaca['email'] : '';?>">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="customFileLang">Imagem de perfil</label>
-                                    <div class="input-group form-row">
-                                        <input type="text" class="form-control" readonly="" name="imagem" value="<?=(isset($bagaca)) ? $bagaca['descImg'] : '';?>">
-                                        <label style="height: 10px;">
-                                            <span class="btn btn-primary input-group-btn">
-                                                Buscar <input type="file" style="display: none;" multiple=""> 
-                                            </span>
-                                        </label>
+                                    <div class="form-row">
+                                        <div class="col-md-10">
+                                            <label for="customFileLang">Imagem de perfil</label>
+                                            <div class="input-group form-row">
+                                                <input type="text" class="form-control" readonly="" name="imagem" value="<?=(isset($bagaca)) ? $bagaca['descImg'] : '';?>">
+                                                <label style="height: 10px;">
+                                                    <span class="btn btn-primary input-group-btn">
+                                                        Buscar <input type="file" style="display: none;" multiple="" name="foto" accept="image/*"> 
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <img src="<?=(isset($_GET['id'])) ? '../public/imgs/' . $bagaca['descImg'] : '../public/imgs/padrao.png' ?>" height="90px" width="90px" style="border-radius: 50%;">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

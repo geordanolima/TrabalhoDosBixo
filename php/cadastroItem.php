@@ -20,7 +20,7 @@
             <div class="card card-register ">
                 <div class="card-header">Cadastrar um Item:</div>
                 <div class="card-body">
-                    <form class="container" action="FuncoesItem.php" method="post">
+                    <form class="container" action="FuncoesItem.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="op" 
                         value="<?=(isset($_GET['id'])) ? 'atualizar' : 'cadastro';?>">
                     <input type="hidden" name="id" 
@@ -51,8 +51,7 @@
                                     <input type="number" class="form-control" name="valor" min="0" max="100" step="10" placeholder="0" required 
                                         value="<?=(isset($item)) ? $item['valor'] : '';?>">
                                 </div>
-                                <div class="col-md-4">
-
+                                <div class="col-md-6">
                                     <div class="form-row">
                                         <div class="col-md-10">
                                             <label for="customFileLang">Imagem Item</label>

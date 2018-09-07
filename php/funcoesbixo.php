@@ -23,6 +23,8 @@ if (isset($_REQUEST['op'])){
             cadastrarBixo();
             break;
     }
+} else {
+    listarBixo();
 }
 
 function carregarFotoBixo($arquivoEmProcesso, $idbixo){

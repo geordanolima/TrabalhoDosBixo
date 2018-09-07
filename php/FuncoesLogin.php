@@ -41,7 +41,7 @@ function isAutenticado(){
     if ( isset( $_SESSION["sessiontime"] ) ) { 
         if ($_SESSION["sessiontime"] < time() ) { 
             session_unset();
-            header('Location: funcoes.php?op=sair');
+            header('Location: FuncoesLogin.php?op=sair');
         }
     } else { 
         session_unset();

@@ -23,6 +23,8 @@ if (isset($_REQUEST['op'])){
             cadastrarJogador();
             break;
     }   
+} else {
+    listarjogador();
 }
 
 function carregarFotoJogador($arquivoEmProcesso, $idjogador){
@@ -33,7 +35,7 @@ function carregarFotoJogador($arquivoEmProcesso, $idjogador){
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/Jog'.$idjogador.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/jog'.$idjogador.'.png');   
     }
     return $validacao;
 }
@@ -73,10 +75,8 @@ function buscaJogador(){
             'genero'        => $achou->getGenero(),
             'email'         => $achou->getEmail(),
             'senha'         => $achou->getSenha(),
-            'descImg'       => $achou->getImagem(),
-            'img'           => '../public/imgs/' . $achou->getImagem()
+            'descImg'       => 'jog' . $achou->getId() . '.png',
         ];
-        
 
         require_once('cadastroJogador.php');
         exit;      
@@ -111,6 +111,7 @@ function atualizarjogador(){
         header('Location: cadastroJogador.php');
         exit;
     }
+    
     if(!empty($_FILES['foto'])){
         $carregou = carregarFotoJogador($_FILES['foto'], $_POST['id']);
     }
@@ -130,7 +131,7 @@ function cadastrarJogador(){
                                 $_POST['apelido'],
                                 $sex,
                                 $_POST['email'],
-                                $_POST['imagem'],
+                                $_POST['descImg'],
                                 $_POST['senha']);
 
         if($jogador->cadastrarJogador()){

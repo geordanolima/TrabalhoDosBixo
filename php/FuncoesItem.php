@@ -2,7 +2,6 @@
 require('classItem.php');
 if (isset($_REQUEST['op'])){
     $opcao = strip_tags($_REQUEST['op']);
-
     switch($opcao){
         case 'excluir':
             excluirItem();
@@ -24,18 +23,19 @@ if (isset($_REQUEST['op'])){
             cadastrarItem();
             break;
     }   
+} else {
+    listarItem();
 }
 
-function carregarFotoItem($arquivoEmProcesso, $iditem){ 
+function carregarFotoItem($arquivoEmProcesso, $id){
     $mimesValidos = [
         'image/png',
         'image/jpg',
         'image/jpeg'
     ];
     $validacao = in_array($arquivoEmProcesso['type'], $mimesValidos);
-    
     if($validacao){
-        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/item'.$iditem.'.png');   
+        $validacao = move_uploaded_file($arquivoEmProcesso['tmp_name'], '../public/imgs/item'.$id.'.png');   
     }
     return $validacao;
 }
@@ -102,7 +102,7 @@ function atualizarItem(){
         listarItem();
         exit;
     }
-    $carregou = carregarFotoItem($_FILES['imagem'], $_POST['id']); //verificar essa linha que ta gerando erro
+    $carregou = carregarFotoItem($_FILES['foto'], $_POST['id']); //verificar essa linha que ta gerando erro
     editaritem();
 }
 
