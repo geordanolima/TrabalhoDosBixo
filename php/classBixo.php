@@ -106,6 +106,39 @@ class Bixo
         return $registro;
     }
 
+    /**
+     * Retorna listagem de todos os pokemons cadastrados
+     * 
+     * @return array com todos os pokemons ou um array vazio se nao existirem cadastros
+     */
+    public function getAll()
+    {
+        $conexao = $this->database->getConexao();
+        $consulta = $conexao->query('SELECT * FROM bixos');
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Retorna array de pokemons em uma string JSON para ser utilizado pelo mapa do jogo (em javascript).
+     * Cuidado com as aspas duplas em string que serao processadas em JSON, utilize o caractere \ (contra-barra) para escapar sempre
+     * que precisar.
+     *
+     * @return void
+     */
+    public function getAllJSON()
+    {
+        $pokemons = $this->getAll();
+        foreach($pokemons as $key=>$value){
+            $pokemons[$key]['info'] = '<p class=\"poke-titulo\">'.$pokemons[$key]['nome'].'</p>' . //cuidado com as aspas pro json_encode
+                                        '<ul><li>HP - '.$pokemons[$key]['vida'].'</li>' .
+                                        '<li>Ataque - '.$pokemons[$key]['ataque'].'</li>' .
+                                        '<li>Defesa - '.$pokemons[$key]['defesa'].'</li></ul>' .
+                                        '<a href=\"capturaBixo.php?id=' . $pokemons[$key]['id'] . '\" class=\"btn btn-block btn-success\" role=\"button\">Cadpturar</a>' .
+                                        '</div>';
+        }
+        return $pokemons;
+    }
+
      /**
      * Get the value of id
      */ 
@@ -285,4 +318,8 @@ class Bixo
 
         return $this;
     }
+
+    
 }
+
+
