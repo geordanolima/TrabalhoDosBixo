@@ -16,7 +16,7 @@
 
     <div class="container captura">
     <img src="../img/animacai.gif" height="400px" width="400px" style="border-radius: 10%; margin 2%;">
-    <img src="<?=(isset($_GET['id'])) ? 'img/bichosmapa/00' . $_GET['id'] . '.png' : '../public/imgs/padrao.png' ?>" height="150px" width="150px" style="border-radius: 50%;">
+    <img src="<?=(isset($_GET['id'])) ? '../public/imgs/bixo' . $_GET['id'] . '.png' : '../public/imgs/padrao.png' ?>" height="150px" width="150px" style="border-radius: 50%;">
     
     
     
